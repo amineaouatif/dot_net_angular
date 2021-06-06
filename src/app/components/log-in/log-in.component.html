@@ -1,7 +1,9 @@
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="box">
     <mat-card-header>
-      <mat-card-title>Se connecter</mat-card-title>
+      <mat-card-title>
+        <div class="card-title">Se connecter</div>
+      </mat-card-title>
     </mat-card-header>
 
     <div>
@@ -16,7 +18,7 @@
       </mat-card-content>
       <button
         mat-stroked-button
-        color="accent"
+        color="primary"
         class="btn-block"
         (click)="login()"
       >

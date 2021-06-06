@@ -1,0 +1,99 @@
+.candidature-card {
+  width: 100%;
+  padding: 100px 50px;
+}
+
+.candidature-container {
+  padding: 50px;
+}
+
+.candidature-first-title {
+  font-size: 3rem;
+  font-weight: 100;
+  text-align: center;
+}
+
+.candidature-first-description {
+  text-align: center;
+  font-size: 2rem;
+  line-height: 2.5rem;
+  font-weight: 100;
+  max-width: 1000px;
+  margin: 100px auto;
+}
+
+.candidature-divider {
+  position: unset !important;
+  max-width: 80%;
+  margin: 40px auto;
+}
+
+.candidature-title {
+  font-size: 1.5rem;
+  font-weight: 100;
+  text-align: center;
+  /* letter-spacing: 0.05rem; */
+}
+
+.info-perso-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 50px;
+}
+
+.info-perso-form-half {
+  max-width: 400px;
+  width: 100%;
+  margin: 0 50px;
+}
+
+.info-perso-input {
+  width: 100%;
+}
+
+.passage-radio-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.passage-radio {
+  margin: 10px 0;
+  font-size: 1rem;
+}
+
+.passage-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.passage-form-half {
+  width: 300px;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.candidature-sub-title {
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin: 20px 0;
+}
+
+.cadre-grade-radio-sub-group {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+.cadre-grade-radio-sub-group > div {
+  margin: 0 20px;
+}
+.cadre-grade-radio-titile {
+  font-weight: 500;
+  font-size: 1rem;
+  padding-top: 15px;
+}

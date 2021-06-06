@@ -1,3 +1,82 @@
-<div style="height: 100%" fxLayout="row" fxLayoutAlign="center center">
-  <div class="box"><h1 style="text-align: center">Welcome</h1></div>
+<div class="container-height">
+  <mat-tab-group>
+    <mat-tab label="Candidatures">
+      <div
+        class="tab-container-height"
+        fxLayout="row"
+        fxLayoutAlign="center top"
+      >
+        <div class="table-container">
+          <mat-table [dataSource]="candidats" style="cursor: pointer">
+            <ng-container matColumnDef="nom">
+              <mat-header-cell *matHeaderCellDef>Nom</mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{ row.nom }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="departement">
+              <mat-header-cell *matHeaderCellDef>Département</mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{ row.departement }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="grade">
+              <mat-header-cell *matHeaderCellDef>Grade actuel</mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{ row.grade }} </mat-cell>
+            </ng-container>
+
+            <mat-header-row
+              *matHeaderRowDef="['nom', 'departement', 'grade']"
+            ></mat-header-row>
+            <mat-row
+              *matRowDef="let row; columns: ['nom', 'departement', 'grade']"
+            ></mat-row>
+          </mat-table>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Evaluateurs">
+      <div
+        class="tab-container-height"
+        fxLayout="row"
+        fxLayoutAlign="center top"
+      >
+        <div class="table-container">
+          <mat-table [dataSource]="evaluateurs" style="cursor: pointer">
+            <ng-container matColumnDef="nom">
+              <mat-header-cell *matHeaderCellDef>Nom</mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{ row.nom }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="departement">
+              <mat-header-cell *matHeaderCellDef>Département</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.departement }}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="grade">
+              <mat-header-cell *matHeaderCellDef>Grade actuel</mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{ row.grade }} </mat-cell>
+            </ng-container>
+
+            <mat-header-row
+              *matHeaderRowDef="['nom', 'departement', 'grade']"
+            ></mat-header-row>
+            <mat-row
+              *matRowDef="let row; columns: ['nom', 'departement', 'grade']"
+            ></mat-row>
+          </mat-table>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Third">
+      <div
+        class="tab-container-height"
+        fxLayout="row"
+        fxLayoutAlign="center center"
+      >
+        <p>Content 3</p>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>

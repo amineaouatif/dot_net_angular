@@ -1,8 +1,11 @@
 <mat-toolbar color="primary" class="app-header">
-  <div class="logo">Dot Net</div>
+  <div routerLink="/home" class="logo">Promotions de Grade</div>
   <span class="nav-tool-items">
-    <a mat-button routerLink="login" routerLinkActive="active">Se connecter</a>
+    <a *ngIf="!isAuth" mat-button routerLink="login" routerLinkActive="active">
+      Se connecter
+    </a>
     <a
+      *ngIf="!isAuth"
       mat-button
       mat-raised-button
       routerLink="register"
@@ -11,5 +14,5 @@
     >
   </span>
 </mat-toolbar>
-
+<div style="height: 64px"></div>
 <router-outlet></router-outlet>
