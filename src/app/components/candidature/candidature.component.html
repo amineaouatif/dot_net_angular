@@ -99,6 +99,7 @@
         </mat-form-field>
       </div>
     </form>
+
     <mat-divider class="candidature-divider"></mat-divider>
     <div class="candidature-title">Type de passage, Cadre et Grade</div>
     <mat-divider class="candidature-divider"></mat-divider>
@@ -131,54 +132,60 @@
             formControlName="typePassage"
             aria-label="Type de passage"
           >
-            <div class="cadre-grade-radio-sub-group">
-              <div class="cadre-grade-radio-titile">PES</div>
-              <div class="passage-radio-group">
-                <mat-radio-button
-                  class="passage-radio"
-                  value="passageExceptionnel"
-                >
-                  Grade A à grade B
-                </mat-radio-button>
-                <mat-radio-button class="passage-radio" value="passageRapide">
-                  Grade B à grade C
-                </mat-radio-button>
+            <div class="passage-mat-radio-group-container">
+              <div class="cadre-grade-radio-sub-group">
+                <div class="cadre-grade-radio-titile">PES</div>
+                <div class="passage-radio-group">
+                  <mat-radio-button
+                    class="passage-radio"
+                    value="passageExceptionnel"
+                  >
+                    Grade A à grade B
+                  </mat-radio-button>
+                  <mat-radio-button class="passage-radio" value="passageRapide">
+                    Grade B à grade C
+                  </mat-radio-button>
+                </div>
               </div>
-            </div>
-            <div class="cadre-grade-radio-sub-group">
-              <div class="cadre-grade-radio-titile">PH</div>
-              <div class="passage-radio-group">
-                <mat-radio-button
-                  class="passage-radio"
-                  value="passageExceptionnel"
-                >
-                  Grade A à grade B
-                </mat-radio-button>
-                <mat-radio-button class="passage-radio" value="passageRapide">
-                  Grade B à grade C
-                </mat-radio-button>
+              <div class="cadre-grade-radio-sub-group">
+                <div class="cadre-grade-radio-titile">PH</div>
+                <div class="passage-radio-group">
+                  <mat-radio-button
+                    class="passage-radio"
+                    value="passageExceptionnel"
+                  >
+                    Grade A à grade B
+                  </mat-radio-button>
+                  <mat-radio-button class="passage-radio" value="passageRapide">
+                    Grade B à grade C
+                  </mat-radio-button>
+                </div>
               </div>
-            </div>
-            <div class="cadre-grade-radio-sub-group">
-              <div class="cadre-grade-radio-titile">PA</div>
-              <div class="passage-radio-group">
-                <mat-radio-button
-                  class="passage-radio"
-                  value="passageExceptionnel"
-                >
-                  Grade A à grade B
-                </mat-radio-button>
-                <mat-radio-button class="passage-radio" value="passageRapide">
-                  Grade B à grade C
-                </mat-radio-button>
-                <mat-radio-button class="passage-radio" value="passageRapide">
-                  Grade C à grade D
-                </mat-radio-button>
+              <div class="cadre-grade-radio-sub-group">
+                <div class="cadre-grade-radio-titile">PA</div>
+                <div class="passage-radio-group">
+                  <mat-radio-button
+                    class="passage-radio"
+                    value="passageExceptionnel"
+                  >
+                    Grade A à grade B
+                  </mat-radio-button>
+                  <mat-radio-button class="passage-radio" value="passageRapide">
+                    Grade B à grade C
+                  </mat-radio-button>
+                  <mat-radio-button class="passage-radio" value="passageRapide">
+                    Grade C à grade D
+                  </mat-radio-button>
+                </div>
               </div>
             </div>
           </mat-radio-group>
         </div>
       </div>
     </form>
+
+    <mat-divider class="candidature-divider"></mat-divider>
+    <div class="candidature-title">Activités Pédagogiques</div>
+    <mat-divider class="candidature-divider"></mat-divider>
   </mat-card>
 </div>
