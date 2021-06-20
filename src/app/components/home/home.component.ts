@@ -1,4 +1,8 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+
+import { HomeService } from '../../services/home.service';
+import { User } from '../../dto/user.dto';
 
 @Component({
   selector: 'app-home',
@@ -43,8 +47,13 @@ export class HomeComponent implements OnInit {
       grade: 'Averyl',
     },
   ];
-  evaluateurs = [];
-  constructor() {}
+  evaluateurs: User[] = [];
+  constructor(readonly homeService: HomeService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.homeService.getEvaluators().subscribe((evals) => {
+      this.evaluateurs = evals;
+      console.log(this.evaluateurs);
+    });
+  }
 }

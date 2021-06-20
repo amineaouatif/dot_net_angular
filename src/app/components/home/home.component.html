@@ -44,19 +44,21 @@
           <mat-table [dataSource]="evaluateurs" style="cursor: pointer">
             <ng-container matColumnDef="nom">
               <mat-header-cell *matHeaderCellDef>Nom</mat-header-cell>
-              <mat-cell *matCellDef="let row"> {{ row.nom }} </mat-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.firstName }}
+              </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="departement">
               <mat-header-cell *matHeaderCellDef>Département</mat-header-cell>
               <mat-cell *matCellDef="let row">
-                {{ row.departement }}
+                {{ row.lastName }}
               </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="grade">
               <mat-header-cell *matHeaderCellDef>Grade actuel</mat-header-cell>
-              <mat-cell *matCellDef="let row"> {{ row.grade }} </mat-cell>
+              <mat-cell *matCellDef="let row"> {{ row.role }} </mat-cell>
             </ng-container>
 
             <mat-header-row

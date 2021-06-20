@@ -16,6 +16,7 @@ export class AuthService {
     this.getAuthFromLocalStorage();
   }
 
+  // tslint:disable-next-line:typedef
   login(username: string, password: string) {
     return this.http
       .post(`${environment.api}/users/authenticate`, {
@@ -35,12 +36,21 @@ export class AuthService {
     localStorage.setItem('auth', JSON.stringify({ username, password }));
   }
 
-  getAuthFromLocalStorage() {
+  getAuthFromLocalStorage(): string | null {
     const jsonString = localStorage.getItem('auth');
     if (!!jsonString) {
-      console.log(jsonString);
       this.isAuthenticated.next(true);
       return JSON.parse(jsonString);
+    }
+    this.isAuthenticated.next(false);
+    return null;
+  }
+
+  getAuthorizationHeader(): string | null {
+    const jsonString = localStorage.getItem('auth');
+    if (!!jsonString) {
+      const authInfo = JSON.parse(jsonString);
+      return btoa(authInfo.username + ':' + authInfo.password);
     }
     this.isAuthenticated.next(false);
     return null;

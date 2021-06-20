@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 /* Routing */
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +23,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { CandidatureComponent } from './components/candidature/candidature.component';
 
+/* Interceptors */
+import { AuthorizationInterceptor } from './interceptors/authorization.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +45,13 @@ import { CandidatureComponent } from './components/candidature/candidature.compo
     FlexLayoutModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthorizationInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
