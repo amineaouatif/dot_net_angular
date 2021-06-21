@@ -94,20 +94,6 @@
               <input matInput placeholder="E-mail" formControlName="email" />
               <mat-icon matSuffix>alternate_email</mat-icon>
             </mat-form-field>
-
-            <mat-form-field class="info-perso-input" appearance="outline">
-              <mat-label>Date de dépôt de dossier</mat-label>
-              <input
-                matInput
-                [matDatepicker]="pickerDepot"
-                formControlName="dateDepot"
-              />
-              <mat-datepicker-toggle
-                matSuffix
-                [for]="pickerDepot"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #pickerDepot></mat-datepicker>
-            </mat-form-field>
           </div>
         </form>
       </mat-step>
@@ -118,7 +104,7 @@
           <div>
             <div class="candidature-sub-title">Type d’avancement</div>
             <mat-form-field appearance="outline">
-              <mat-label>Favorite food</mat-label>
+              <mat-label>Sélectionner</mat-label>
               <mat-select formControlName="typePassage">
                 <mat-option
                   *ngFor="let element of typeAvancement"
@@ -133,7 +119,7 @@
           <div>
             <div class="candidature-sub-title">Cadre et grade</div>
             <mat-form-field appearance="outline">
-              <mat-label>Cadre et grade</mat-label>
+              <mat-label>Sélectionner</mat-label>
               <mat-select formControlName="cadreGrade">
                 <mat-option
                   *ngFor="let element of cadreGrade"
@@ -311,5 +297,6 @@
         </mat-vertical-stepper>
       </mat-step>
     </mat-vertical-stepper>
+    <button (click)="submit()">submit</button>
   </div>
 </div>

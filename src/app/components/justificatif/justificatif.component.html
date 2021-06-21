@@ -8,8 +8,8 @@
           <mat-divider></mat-divider>
           <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
           <div mat-line>{{ item.documentName }}</div>
-          <div mat-line>{{ item.fileName }}</div>
-          <button mat-icon-button color="warn" aria-label="Delete">
+          <div mat-line>{{ item.localFileName }}</div>
+          <button mat-icon-button color="warn" aria-label="Delete" (click)="delete(item.id)">
             <mat-icon color="warn">delete</mat-icon>
           </button>
         </mat-list-item>
