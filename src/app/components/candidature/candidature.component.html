@@ -16,7 +16,6 @@
     <mat-vertical-stepper
       [linear]="false"
       class="mat-elevation-z2 candidature-vertical-stepper"
-      #stepper
     >
       <mat-step [stepControl]="donneesPersonnelles">
         <ng-template matStepLabel>Données personnelles</ng-template>
@@ -115,139 +114,201 @@
 
       <mat-step [stepControl]="passageCadreGrade">
         <ng-template matStepLabel>Type de passage, Cadre et Grade</ng-template>
-        <form [formGroup]="passageCadreGrade" class="passage-form">
-          <div class="passage-form-half">
-            <div>
-              <div class="candidature-sub-title">Type d’avancement</div>
-              <mat-radio-group
-                formControlName="typePassage"
-                aria-label="Type de passage"
-                class="passage-radio-group"
-              >
-                <mat-radio-button
-                  class="passage-radio"
-                  value="passageExceptionnel"
+        <form [formGroup]="passageCadreGrade">
+          <div>
+            <div class="candidature-sub-title">Type d’avancement</div>
+            <mat-form-field appearance="outline">
+              <mat-label>Favorite food</mat-label>
+              <mat-select formControlName="typePassage">
+                <mat-option
+                  *ngFor="let element of typeAvancement"
+                  [value]="element.value"
                 >
-                  Passage Exceptionnel
-                </mat-radio-button>
-                <mat-radio-button class="passage-radio" value="passageRapide">
-                  Passage Rapide
-                </mat-radio-button>
-                <mat-radio-button class="passage-radio" value="passageNormal">
-                  Passage normal
-                </mat-radio-button>
-              </mat-radio-group>
-            </div>
+                  {{ element.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
-          <div class="passage-form-half">
-            <div style="width: 100%">
-              <div class="candidature-sub-title">Cadre et grade</div>
-              <mat-radio-group
-                formControlName="typePassage"
-                aria-label="Type de passage"
-              >
-                <div class="passage-mat-radio-group-container">
-                  <div class="cadre-grade-radio-sub-group">
-                    <div class="cadre-grade-radio-titile">PES</div>
-                    <div class="passage-radio-group">
-                      <mat-radio-button
-                        class="passage-radio"
-                        value="passageExceptionnel"
-                      >
-                        Grade A à grade B
-                      </mat-radio-button>
-                      <mat-radio-button
-                        class="passage-radio"
-                        value="passageRapide"
-                      >
-                        Grade B à grade C
-                      </mat-radio-button>
-                    </div>
-                  </div>
-                  <div class="cadre-grade-radio-sub-group">
-                    <div class="cadre-grade-radio-titile">PH</div>
-                    <div class="passage-radio-group">
-                      <mat-radio-button
-                        class="passage-radio"
-                        value="passageExceptionnel"
-                      >
-                        Grade A à grade B
-                      </mat-radio-button>
-                      <mat-radio-button
-                        class="passage-radio"
-                        value="passageRapide"
-                      >
-                        Grade B à grade C
-                      </mat-radio-button>
-                    </div>
-                  </div>
-                  <div class="cadre-grade-radio-sub-group">
-                    <div class="cadre-grade-radio-titile">PA</div>
-                    <div class="passage-radio-group">
-                      <mat-radio-button
-                        class="passage-radio"
-                        value="passageExceptionnel"
-                      >
-                        Grade A à grade B
-                      </mat-radio-button>
-                      <mat-radio-button
-                        class="passage-radio"
-                        value="passageRapide"
-                      >
-                        Grade B à grade C
-                      </mat-radio-button>
-                      <mat-radio-button
-                        class="passage-radio"
-                        value="passageRapide"
-                      >
-                        Grade C à grade D
-                      </mat-radio-button>
-                    </div>
-                  </div>
-                </div>
-              </mat-radio-group>
-            </div>
+
+          <div>
+            <div class="candidature-sub-title">Cadre et grade</div>
+            <mat-form-field appearance="outline">
+              <mat-label>Cadre et grade</mat-label>
+              <mat-select formControlName="cadreGrade">
+                <mat-option
+                  *ngFor="let element of cadreGrade"
+                  [value]="element.name"
+                >
+                  {{ element.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
         </form>
       </mat-step>
 
       <mat-step>
         <ng-template matStepLabel>Activités Pédagogiques</ng-template>
-        <div class="candidature-title">Production pédagogique</div>
-        <app-justificatif
-          title="Ouvrages ou manuels"
-          [(data)]="ouvragesOuManuels"
-        ></app-justificatif>
-        <app-justificatif
-          title="Polycopiés d’enseignement"
-          [(data)]="polycopiesEnseignement"
-        ></app-justificatif>
-        <app-justificatif
-          title="Supports et procédés didactiques"
-          [(data)]="supportsEtProcedesDidactiques"
-        ></app-justificatif>
+        <mat-vertical-stepper [linear]="false">
+          <mat-step>
+            <ng-template matStepLabel>Production pédagogique</ng-template>
+            <app-justificatif
+              title="Ouvrages ou manuels"
+              [(data)]="ouvragesManuels"
+            ></app-justificatif>
+            <app-justificatif
+              title="Polycopiés d’enseignement"
+              [(data)]="polycopiesEnseignement"
+            ></app-justificatif>
+            <app-justificatif
+              title="Supports et procédés didactiques"
+              [(data)]="supportsProcedesDidactiques"
+            ></app-justificatif>
+          </mat-step>
 
-        <div class="candidature-title">Encadrement pédagogique</div>
-        <app-justificatif
-          title="Encadrement de projets - PFE Cycle Ingénieur"
-          [(data)]="encadrementProjetsPFE"
-        ></app-justificatif>
-        <app-justificatif
-          title="Encadrement de projets - PFA Cycle Ingénieur"
-          [(data)]="encadrementProjetsPFA"
-        ></app-justificatif>
-        <app-justificatif
-          title="Mémoires de fin d’études - Master"
-          [(data)]="memoiresdeFinEtudesMaster"
-        ></app-justificatif>
-        <app-justificatif
-          title="Encadrement de stages"
-          [(data)]="encadrementDeStages"
-        ></app-justificatif>
-        <app-justificatif
-          title="Encadrement de ressources humaines"
-          [(data)]="encadrementDeRessourcesHumaines"
-        ></app-justificatif>
+          <mat-step>
+            <ng-template matStepLabel>Encadrement pédagogique</ng-template>
+            <app-justificatif
+              title="Encadrement de projets - PFE Cycle Ingénieur"
+              [(data)]="encadrementProjetsPFE"
+            ></app-justificatif>
+            <app-justificatif
+              title="Encadrement de projets - PFA Cycle Ingénieur"
+              [(data)]="encadrementProjetsPFA"
+            ></app-justificatif>
+            <app-justificatif
+              title="Mémoires de fin d’études - Master"
+              [(data)]="memoiresFinEtudesMaster"
+            ></app-justificatif>
+            <app-justificatif
+              title="Encadrement de stages"
+              [(data)]="encadrementStages"
+            ></app-justificatif>
+            <app-justificatif
+              title="Encadrement de ressources humaines"
+              [(data)]="encadrementRessourcesHumaines"
+            ></app-justificatif>
+          </mat-step>
+
+          <mat-step>
+            <ng-template matStepLabel>
+              Responsabilités pédagogiques et administratives
+            </ng-template>
+            <app-justificatif
+              title="Gestion d’un département"
+              [(data)]="gestionDepartement"
+            ></app-justificatif>
+            <app-justificatif
+              title="Responsable de Filière ou de Module"
+              [(data)]="responsableFiliereModule"
+            ></app-justificatif>
+            <app-justificatif
+              title="Gestion d’une formation universitaire - Années préparatoires"
+              [(data)]="gestionFormationUniversitairePrepa"
+            ></app-justificatif>
+            <app-justificatif
+              title="Gestion d’une formation universitaire - Cycle Ingénieur"
+              [(data)]="gestionFormationUniversitaireIng"
+            ></app-justificatif>
+            <app-justificatif
+              title="Membre du Conseil d’Université"
+              [(data)]="membreConseilUniversite"
+            ></app-justificatif>
+            <app-justificatif
+              title="Membre de Commission Paritaire"
+              [(data)]="membreCommissionParitaire"
+            ></app-justificatif>
+            <app-justificatif
+              title="Membre du Conseil de l’Etablissement"
+              [(data)]="membreConseilEtablissement"
+            ></app-justificatif>
+            <app-justificatif
+              title="Membre de la Commission scientifique de l’Etablissement"
+              [(data)]="membreCommissionScientifique"
+            ></app-justificatif>
+            <app-justificatif
+              title="Membre des commissions de réforme ou d’expertise pédagogique nationale ou internationale"
+              [(data)]="membreCommissionReformeExpertisePedagogique"
+            ></app-justificatif>
+          </mat-step>
+        </mat-vertical-stepper>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Activités de Recherche</ng-template>
+        <mat-vertical-stepper [linear]="false">
+          <mat-step>
+            <ng-template matStepLabel>Production scientifique</ng-template>
+            <app-justificatif
+              title="Articles scientifiques dans des revues spécialisées - Catégorie 1"
+              [(data)]="articlesScientifiquesCategorie1"
+            ></app-justificatif>
+            <app-justificatif
+              title="Articles scientifiques dans des revues spécialisées - Catégorie 2"
+              [(data)]="articlesScientifiquesCategorie2"
+            ></app-justificatif>
+            <app-justificatif
+              title="Ouvrages de recherche scientifiques"
+              [(data)]="ouvragesRechercheScientifiques"
+            ></app-justificatif>
+            <app-justificatif
+              title="Publications dans des actes de congrès à comité de lecture"
+              [(data)]="publicationsActesCongres"
+            ></app-justificatif>
+          </mat-step>
+
+          <mat-step>
+            <ng-template matStepLabel>
+              Encadrement (E) ou Co-encadrement scientifique
+            </ng-template>
+            <app-justificatif
+              title="Encadrement ou et co-encadrement de thèses de doctorat"
+              [(data)]="encadrementCoencadrementThesesDoctorat"
+            ></app-justificatif>
+            <app-justificatif
+              title="Encadrement ou et co-encadrement de travaux de recherche (Master)"
+              [(data)]="encadrementCoencadrementTravauxRechercheMaster"
+            ></app-justificatif>
+            <app-justificatif
+              title="Rapporteur ou Membre de jury de thèse ou habilitation scientifique"
+              [(data)]="RapporteurMembreJury"
+            ></app-justificatif>
+          </mat-step>
+
+          <mat-step>
+            <ng-template matStepLabel>
+              Responsabilités scientifiques
+            </ng-template>
+            <app-justificatif
+              title="Laboratoire, Equipe et CED"
+              [(data)]="laboratoireEquipeCed"
+            ></app-justificatif>
+            <app-justificatif
+              title="Pôles de Compétence et Réseaux (nationaux ou internationaux)"
+              [(data)]="polesCompetenceReseaux"
+            ></app-justificatif>
+            <app-justificatif
+              title="CED, Doctorat, Master"
+              [(data)]="cedDoctoratMaster"
+            ></app-justificatif>
+            <app-justificatif
+              title="Projets ou contrats de recherche financés"
+              [(data)]="projetsContratsRechercheFinances"
+            ></app-justificatif>
+            <app-justificatif
+              title="Activités d’expertise, d’évaluations scientifiques, nationales ou internationales"
+              [(data)]="activitesExpertiseEvaluationsScientifiques"
+            ></app-justificatif>
+            <app-justificatif
+              title="Organisation de manifestations scientifiques nationales ou internationales"
+              [(data)]="organisationManifestationsScientifiques"
+            ></app-justificatif>
+            <app-justificatif
+              title="Organisation de séminaire"
+              [(data)]="organisationSeminaire"
+            ></app-justificatif>
+          </mat-step>
+        </mat-vertical-stepper>
       </mat-step>
     </mat-vertical-stepper>
   </div>

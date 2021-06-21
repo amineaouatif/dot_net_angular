@@ -7,7 +7,7 @@
   font-size: 3rem;
   font-weight: 100;
   text-align: center;
-  margin: 75px auto;
+  margin: 75px;
 }
 
 .header-card {
@@ -31,8 +31,9 @@
 }
 
 .candidature-vertical-stepper {
+  margin-top: 75px;
   padding: 75px;
-  min-height: 900px;
+  /* min-height: 900px; */
 }
 
 .info-perso-form {
