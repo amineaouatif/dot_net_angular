@@ -1,16 +1,18 @@
-.candidature-card {
+.candidature-container {
   width: 100%;
   padding: 100px 50px;
-}
-
-.candidature-container {
-  padding: 50px;
 }
 
 .candidature-first-title {
   font-size: 3rem;
   font-weight: 100;
   text-align: center;
+  margin: 75px auto;
+}
+
+.header-card {
+  margin-bottom: 50px;
+  padding: 100px 50px;
 }
 
 .candidature-first-description {
@@ -19,20 +21,18 @@
   line-height: 2.5rem;
   font-weight: 100;
   max-width: 1000px;
-  margin: 100px auto;
+  margin: 75px auto;
 }
 
 .candidature-divider {
   position: unset !important;
   max-width: 80%;
-  margin: 40px auto;
+  margin: 0px auto;
 }
 
-.candidature-title {
-  font-size: 1.5rem;
-  font-weight: 100;
-  text-align: center;
-  /* letter-spacing: 0.05rem; */
+.candidature-vertical-stepper {
+  padding: 75px;
+  min-height: 900px;
 }
 
 .info-perso-form {
@@ -80,7 +80,7 @@
 
 .candidature-sub-title {
   font-size: 1.3rem;
-  font-weight: 500;
+  font-weight: 100;
   margin: 20px 0;
 }
 
@@ -103,4 +103,10 @@
 .passage-mat-radio-group-container {
   display: flex;
   flex-wrap: wrap;
+}
+
+.candidature-title {
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-top: 50px;
 }

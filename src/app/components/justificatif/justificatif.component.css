@@ -1,0 +1,51 @@
+.justificatif-container {
+  width: 100%;
+  padding: 10px 0px;
+}
+
+.justificatif-titre {
+  font-size: 1.2rem;
+  font-weight: 100;
+  margin: 20px 0;
+}
+
+.upload-file {
+  top: -9999px;
+  left: 0px;
+  position: absolute;
+  z-index: -999;
+  opacity: 0;
+}
+
+.charger-document {
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+}
+
+.nom-fichier {
+  margin-left: 25px;
+  color: #777777;
+}
+
+.charger-document-nom {
+  margin: 0 auto;
+  min-width: 350px;
+  margin-bottom: -1.25em;
+}
+
+.charger-document-titre {
+  font-size: 1rem;
+  margin: 25px 0;
+  display: flex;
+}
+
+.ajouter-button {
+  width: 100%;
+  max-width: 350px;
+  margin-top: 20px;
+}
+
+.justificatif-expansion-panel-header {
+  padding-left: 5px;
+}

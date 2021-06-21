@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+interface Justificatif {
+  documentName: string;
+  fileName: string;
+}
+
 @Component({
   selector: 'app-candidature',
   templateUrl: './candidature.component.html',
@@ -25,6 +30,16 @@ export class CandidatureComponent implements OnInit {
   passageCadreGrade = new FormGroup({
     typePassage: new FormControl('', Validators.required),
   });
+
+  ouvragesOuManuels: Array<Justificatif> = [];
+  polycopiesEnseignement: Array<Justificatif> = [];
+  supportsEtProcedesDidactiques: Array<Justificatif> = [];
+  encadrementProjetsPFE: Array<Justificatif> = [];
+  encadrementProjetsPFA: Array<Justificatif> = [];
+  memoiresdeFinEtudesMaster: Array<Justificatif> = [];
+  encadrementDeStages: Array<Justificatif> = [];
+  encadrementDeRessourcesHumaines: Array<Justificatif> = [];
+
   constructor() {}
 
   ngOnInit(): void {}

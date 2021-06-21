@@ -3,189 +3,252 @@
   fxLayout="row"
   fxLayoutAlign="center top"
 >
-  <mat-card class="candidature-card">
-    <h1 class="candidature-first-title">Dossier de candidature</h1>
-    <div class="candidature-first-description">
-      Dossier de candidature à remplir par l'enseignant-chercheur en vue
-      d'avancement de grade à grade
-    </div>
-    <mat-divider class="candidature-divider"></mat-divider>
-    <div class="candidature-title">Données personnelles</div>
-    <mat-divider class="candidature-divider"></mat-divider>
-
-    <form [formGroup]="donneesPersonnelles" class="info-perso-form">
-      <div class="info-perso-form-half">
-        <mat-form-field class="info-perso-input" appearance="outline">
-          <mat-label>Nom</mat-label>
-          <input matInput placeholder="Nom" formControlName="nom" />
-        </mat-form-field>
-
-        <mat-form-field class="info-perso-input" appearance="outline">
-          <mat-label>Prénom</mat-label>
-          <input matInput placeholder="Prénom" formControlName="prenom" />
-        </mat-form-field>
-
-        <mat-form-field class="info-perso-input" appearance="outline">
-          <mat-label>Département</mat-label>
-          <input
-            matInput
-            placeholder="Département"
-            formControlName="departement"
-          />
-        </mat-form-field>
-
-        <mat-form-field class="info-perso-input" appearance="outline">
-          <mat-label>Date de recrutement</mat-label>
-          <input
-            matInput
-            [matDatepicker]="pickerRecrutement"
-            formControlName="dateRecrutement"
-          />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="pickerRecrutement"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #pickerRecrutement></mat-datepicker>
-        </mat-form-field>
+  <div>
+    <mat-card class="header-card mat-elevation-z2">
+      <h1 class="candidature-first-title">Dossier de candidature</h1>
+      <mat-divider class="candidature-divider"></mat-divider>
+      <div class="candidature-first-description">
+        Dossier de candidature à remplir par l'enseignant-chercheur en vue
+        d'avancement de grade à grade
       </div>
+    </mat-card>
 
-      <div class="info-perso-form-half">
-        <mat-form-field class="info-perso-input" appearance="outline">
-          <mat-label>Grade actuel</mat-label>
-          <mat-select formControlName="grade" required>
-            <mat-option>--</mat-option>
-            <mat-option *ngFor="let grade of grades" [value]="grade">
-              {{ grade.name }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="false">Veuillez choisir un grade</mat-error>
-        </mat-form-field>
+    <mat-vertical-stepper
+      [linear]="false"
+      class="mat-elevation-z2 candidature-vertical-stepper"
+      #stepper
+    >
+      <mat-step [stepControl]="donneesPersonnelles">
+        <ng-template matStepLabel>Données personnelles</ng-template>
+        <form [formGroup]="donneesPersonnelles" class="info-perso-form">
+          <div class="info-perso-form-half">
+            <mat-form-field class="info-perso-input" appearance="outline">
+              <mat-label>Nom</mat-label>
+              <input matInput placeholder="Nom" formControlName="nom" />
+            </mat-form-field>
 
-        <mat-form-field class="info-perso-input" appearance="outline">
-          <mat-label>Téléphone</mat-label>
-          <input
-            type="tel"
-            matInput
-            placeholder="Téléphone"
-            formControlName="telephone"
-          />
-          <mat-icon matSuffix>smartphone</mat-icon>
-        </mat-form-field>
+            <mat-form-field class="info-perso-input" appearance="outline">
+              <mat-label>Prénom</mat-label>
+              <input matInput placeholder="Prénom" formControlName="prenom" />
+            </mat-form-field>
 
-        <mat-form-field class="info-perso-input" appearance="outline">
-          <mat-label>Fax</mat-label>
-          <input type="tel" matInput placeholder="Fax" formControlName="fax" />
-          <mat-icon matSuffix>phone</mat-icon>
-        </mat-form-field>
+            <mat-form-field class="info-perso-input" appearance="outline">
+              <mat-label>Département</mat-label>
+              <input
+                matInput
+                placeholder="Département"
+                formControlName="departement"
+              />
+            </mat-form-field>
 
-        <mat-form-field class="info-perso-input" appearance="outline">
-          <mat-label>E-mail</mat-label>
-          <input matInput placeholder="E-mail" formControlName="email" />
-          <mat-icon matSuffix>alternate_email</mat-icon>
-        </mat-form-field>
+            <mat-form-field class="info-perso-input" appearance="outline">
+              <mat-label>Date de recrutement</mat-label>
+              <input
+                matInput
+                [matDatepicker]="pickerRecrutement"
+                formControlName="dateRecrutement"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="pickerRecrutement"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #pickerRecrutement></mat-datepicker>
+            </mat-form-field>
+          </div>
 
-        <mat-form-field class="info-perso-input" appearance="outline">
-          <mat-label>Date de dépôt de dossier</mat-label>
-          <input
-            matInput
-            [matDatepicker]="pickerDepot"
-            formControlName="dateDepot"
-          />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="pickerDepot"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #pickerDepot></mat-datepicker>
-        </mat-form-field>
-      </div>
-    </form>
+          <div class="info-perso-form-half">
+            <mat-form-field class="info-perso-input" appearance="outline">
+              <mat-label>Grade actuel</mat-label>
+              <mat-select formControlName="grade" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let grade of grades" [value]="grade">
+                  {{ grade.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="false">Veuillez choisir un grade</mat-error>
+            </mat-form-field>
 
-    <mat-divider class="candidature-divider"></mat-divider>
-    <div class="candidature-title">Type de passage, Cadre et Grade</div>
-    <mat-divider class="candidature-divider"></mat-divider>
+            <mat-form-field class="info-perso-input" appearance="outline">
+              <mat-label>Téléphone</mat-label>
+              <input
+                type="tel"
+                matInput
+                placeholder="Téléphone"
+                formControlName="telephone"
+              />
+              <mat-icon matSuffix>smartphone</mat-icon>
+            </mat-form-field>
 
-    <form [formGroup]="passageCadreGrade" class="passage-form">
-      <div class="passage-form-half">
-        <div>
-          <div class="candidature-sub-title">Type d’avancement</div>
-          <mat-radio-group
-            formControlName="typePassage"
-            aria-label="Type de passage"
-            class="passage-radio-group"
-          >
-            <mat-radio-button class="passage-radio" value="passageExceptionnel">
-              Passage Exceptionnel
-            </mat-radio-button>
-            <mat-radio-button class="passage-radio" value="passageRapide">
-              Passage Rapide
-            </mat-radio-button>
-            <mat-radio-button class="passage-radio" value="passageNormal">
-              Passage normal
-            </mat-radio-button>
-          </mat-radio-group>
-        </div>
-      </div>
-      <div class="passage-form-half">
-        <div style="width: 100%">
-          <div class="candidature-sub-title">Cadre et grade</div>
-          <mat-radio-group
-            formControlName="typePassage"
-            aria-label="Type de passage"
-          >
-            <div class="passage-mat-radio-group-container">
-              <div class="cadre-grade-radio-sub-group">
-                <div class="cadre-grade-radio-titile">PES</div>
-                <div class="passage-radio-group">
-                  <mat-radio-button
-                    class="passage-radio"
-                    value="passageExceptionnel"
-                  >
-                    Grade A à grade B
-                  </mat-radio-button>
-                  <mat-radio-button class="passage-radio" value="passageRapide">
-                    Grade B à grade C
-                  </mat-radio-button>
-                </div>
-              </div>
-              <div class="cadre-grade-radio-sub-group">
-                <div class="cadre-grade-radio-titile">PH</div>
-                <div class="passage-radio-group">
-                  <mat-radio-button
-                    class="passage-radio"
-                    value="passageExceptionnel"
-                  >
-                    Grade A à grade B
-                  </mat-radio-button>
-                  <mat-radio-button class="passage-radio" value="passageRapide">
-                    Grade B à grade C
-                  </mat-radio-button>
-                </div>
-              </div>
-              <div class="cadre-grade-radio-sub-group">
-                <div class="cadre-grade-radio-titile">PA</div>
-                <div class="passage-radio-group">
-                  <mat-radio-button
-                    class="passage-radio"
-                    value="passageExceptionnel"
-                  >
-                    Grade A à grade B
-                  </mat-radio-button>
-                  <mat-radio-button class="passage-radio" value="passageRapide">
-                    Grade B à grade C
-                  </mat-radio-button>
-                  <mat-radio-button class="passage-radio" value="passageRapide">
-                    Grade C à grade D
-                  </mat-radio-button>
-                </div>
-              </div>
+            <mat-form-field class="info-perso-input" appearance="outline">
+              <mat-label>Fax</mat-label>
+              <input
+                type="tel"
+                matInput
+                placeholder="Fax"
+                formControlName="fax"
+              />
+              <mat-icon matSuffix>phone</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="info-perso-input" appearance="outline">
+              <mat-label>E-mail</mat-label>
+              <input matInput placeholder="E-mail" formControlName="email" />
+              <mat-icon matSuffix>alternate_email</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="info-perso-input" appearance="outline">
+              <mat-label>Date de dépôt de dossier</mat-label>
+              <input
+                matInput
+                [matDatepicker]="pickerDepot"
+                formControlName="dateDepot"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="pickerDepot"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #pickerDepot></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="passageCadreGrade">
+        <ng-template matStepLabel>Type de passage, Cadre et Grade</ng-template>
+        <form [formGroup]="passageCadreGrade" class="passage-form">
+          <div class="passage-form-half">
+            <div>
+              <div class="candidature-sub-title">Type d’avancement</div>
+              <mat-radio-group
+                formControlName="typePassage"
+                aria-label="Type de passage"
+                class="passage-radio-group"
+              >
+                <mat-radio-button
+                  class="passage-radio"
+                  value="passageExceptionnel"
+                >
+                  Passage Exceptionnel
+                </mat-radio-button>
+                <mat-radio-button class="passage-radio" value="passageRapide">
+                  Passage Rapide
+                </mat-radio-button>
+                <mat-radio-button class="passage-radio" value="passageNormal">
+                  Passage normal
+                </mat-radio-button>
+              </mat-radio-group>
             </div>
-          </mat-radio-group>
-        </div>
-      </div>
-    </form>
+          </div>
+          <div class="passage-form-half">
+            <div style="width: 100%">
+              <div class="candidature-sub-title">Cadre et grade</div>
+              <mat-radio-group
+                formControlName="typePassage"
+                aria-label="Type de passage"
+              >
+                <div class="passage-mat-radio-group-container">
+                  <div class="cadre-grade-radio-sub-group">
+                    <div class="cadre-grade-radio-titile">PES</div>
+                    <div class="passage-radio-group">
+                      <mat-radio-button
+                        class="passage-radio"
+                        value="passageExceptionnel"
+                      >
+                        Grade A à grade B
+                      </mat-radio-button>
+                      <mat-radio-button
+                        class="passage-radio"
+                        value="passageRapide"
+                      >
+                        Grade B à grade C
+                      </mat-radio-button>
+                    </div>
+                  </div>
+                  <div class="cadre-grade-radio-sub-group">
+                    <div class="cadre-grade-radio-titile">PH</div>
+                    <div class="passage-radio-group">
+                      <mat-radio-button
+                        class="passage-radio"
+                        value="passageExceptionnel"
+                      >
+                        Grade A à grade B
+                      </mat-radio-button>
+                      <mat-radio-button
+                        class="passage-radio"
+                        value="passageRapide"
+                      >
+                        Grade B à grade C
+                      </mat-radio-button>
+                    </div>
+                  </div>
+                  <div class="cadre-grade-radio-sub-group">
+                    <div class="cadre-grade-radio-titile">PA</div>
+                    <div class="passage-radio-group">
+                      <mat-radio-button
+                        class="passage-radio"
+                        value="passageExceptionnel"
+                      >
+                        Grade A à grade B
+                      </mat-radio-button>
+                      <mat-radio-button
+                        class="passage-radio"
+                        value="passageRapide"
+                      >
+                        Grade B à grade C
+                      </mat-radio-button>
+                      <mat-radio-button
+                        class="passage-radio"
+                        value="passageRapide"
+                      >
+                        Grade C à grade D
+                      </mat-radio-button>
+                    </div>
+                  </div>
+                </div>
+              </mat-radio-group>
+            </div>
+          </div>
+        </form>
+      </mat-step>
 
-    <mat-divider class="candidature-divider"></mat-divider>
-    <div class="candidature-title">Activités Pédagogiques</div>
-    <mat-divider class="candidature-divider"></mat-divider>
-  </mat-card>
+      <mat-step>
+        <ng-template matStepLabel>Activités Pédagogiques</ng-template>
+        <div class="candidature-title">Production pédagogique</div>
+        <app-justificatif
+          title="Ouvrages ou manuels"
+          [(data)]="ouvragesOuManuels"
+        ></app-justificatif>
+        <app-justificatif
+          title="Polycopiés d’enseignement"
+          [(data)]="polycopiesEnseignement"
+        ></app-justificatif>
+        <app-justificatif
+          title="Supports et procédés didactiques"
+          [(data)]="supportsEtProcedesDidactiques"
+        ></app-justificatif>
+
+        <div class="candidature-title">Encadrement pédagogique</div>
+        <app-justificatif
+          title="Encadrement de projets - PFE Cycle Ingénieur"
+          [(data)]="encadrementProjetsPFE"
+        ></app-justificatif>
+        <app-justificatif
+          title="Encadrement de projets - PFA Cycle Ingénieur"
+          [(data)]="encadrementProjetsPFA"
+        ></app-justificatif>
+        <app-justificatif
+          title="Mémoires de fin d’études - Master"
+          [(data)]="memoiresdeFinEtudesMaster"
+        ></app-justificatif>
+        <app-justificatif
+          title="Encadrement de stages"
+          [(data)]="encadrementDeStages"
+        ></app-justificatif>
+        <app-justificatif
+          title="Encadrement de ressources humaines"
+          [(data)]="encadrementDeRessourcesHumaines"
+        ></app-justificatif>
+      </mat-step>
+    </mat-vertical-stepper>
+  </div>
 </div>

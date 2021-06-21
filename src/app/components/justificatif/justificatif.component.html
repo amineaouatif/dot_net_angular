@@ -1,0 +1,79 @@
+<div class="justificatif-container">
+  <div>
+    <div class="justificatif-titre">{{ title }}</div>
+    <mat-list role="list">
+      <mat-divider></mat-divider>
+      <div *ngIf="data?.length > 0">
+        <mat-list-item *ngFor="let item of data" role="listitem">
+          <mat-divider></mat-divider>
+          <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+          <div mat-line>{{ item.documentName }}</div>
+          <div mat-line>{{ item.fileName }}</div>
+          <button mat-icon-button color="warn" aria-label="Delete">
+            <mat-icon color="warn">delete</mat-icon>
+          </button>
+        </mat-list-item>
+      </div>
+    </mat-list>
+
+    <mat-expansion-panel
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+      class="mat-elevation-z0"
+    >
+      <mat-expansion-panel-header class="justificatif-expansion-panel-header">
+        <div class="charger-document-titre">
+          <mat-spinner
+            *ngIf="isUploading"
+            diameter="20"
+            style="margin-right: 20px"
+          ></mat-spinner>
+          <div>Ajouter un document</div>
+        </div></mat-expansion-panel-header
+      >
+      <div>
+        <div class="charger-document">
+          <button mat-flat-button color="primary" (click)="fileInput.click()">
+            Charger un fichier
+          </button>
+          <input
+            type="file"
+            #fileInput
+            class="upload-file"
+            (change)="uploadFileEvt($event)"
+            name="upload-file"
+          />
+          <div class="nom-fichier">
+            {{
+              fileName
+                ? fileName
+                : "Formats supportés : PDF, DOC, DOCX, EPUB, MOBI"
+            }}
+          </div>
+        </div>
+        <div>
+          <div>
+            <mat-form-field appearance="outline" class="charger-document-nom">
+              <mat-label>Nom du document</mat-label>
+              <input
+                [(ngModel)]="documentName"
+                matInput
+                placeholder="Nom du document"
+                (change)="documentName = documentName.trim()"
+              />
+            </mat-form-field>
+          </div>
+          <button
+            mat-flat-button
+            color="primary"
+            class="ajouter-button"
+            (click)="addElement()"
+            [disabled]="!fileName || !documentName"
+          >
+            <span>Ajouter</span>
+          </button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </div>
+</div>

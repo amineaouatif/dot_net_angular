@@ -17,7 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 /* Angular Flex Layout */
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-/* Components */
+/* Comopnents */
 import { LogInComponent } from './components/log-in/log-in.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
@@ -25,6 +25,8 @@ import { CandidatureComponent } from './components/candidature/candidature.compo
 
 /* Interceptors */
 import { AuthorizationInterceptor } from './interceptors/authorization.interceptor';
+import { JustificatifComponent } from './components/justificatif/justificatif.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +36,7 @@ import { AuthorizationInterceptor } from './interceptors/authorization.intercept
     LogInComponent,
     HomeComponent,
     CandidatureComponent,
+    JustificatifComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,7 +9,7 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   min-height: 100vh;
-  background: #e2e2e2;
+  background: #f0f1f3;
 }
 
 .container-height {
@@ -25,6 +25,12 @@ body {
   z-index: 2;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
     0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+}
+
+.mat-step-text-label {
+  font-size: 1.4rem;
+  font-weight: 100;
+  padding: 5px;
 }
 
 .login-wrapper {
@@ -50,7 +56,7 @@ body {
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   z-index: 5;
-  max-width: 350px;
+  max-width: 450px;
 }
 
 .box:before {
