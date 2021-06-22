@@ -6,7 +6,7 @@
       </mat-card-title>
     </mat-card-header>
 
-    <div>
+    <div (keyup.enter)="login()">
       <mat-card-content>
         <mat-form-field class="full-width">
           <input [(ngModel)]="username" matInput placeholder="Nom" />
@@ -21,6 +21,7 @@
         color="primary"
         class="btn-block"
         (click)="login()"
+        [disabled]="!username || !password"
       >
         Se connecter
       </button>

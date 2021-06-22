@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { NotificationService } from './services/notification.service';
+import { LoadingService } from './services/loading.service';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +12,16 @@ import { NotificationService } from './services/notification.service';
 })
 export class AppComponent {
   isAuth: boolean;
+  loading = false;
 
   constructor(
     private authService: AuthService,
     private notificationService: NotificationService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private router: Router,
+    private loadingService: LoadingService
   ) {
-    this.authService.isAuthenticated.subscribe(
+    this.authService.isAuthenticated$.subscribe(
       (isAuth: boolean) => (this.isAuth = isAuth)
     );
 
@@ -25,5 +30,14 @@ export class AppComponent {
         duration: 2 * 1000,
       })
     );
+
+    this.loadingService.loading$.subscribe(
+      (val: boolean) => (this.loading = val)
+    );
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigateByUrl('/login');
   }
 }

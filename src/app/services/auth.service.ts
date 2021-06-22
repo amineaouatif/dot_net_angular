@@ -15,10 +15,14 @@ interface AuthData {
   providedIn: 'root',
 })
 export class AuthService {
-  isAuthenticated = new BehaviorSubject<boolean>(false);
+  isAuthenticated$ = new BehaviorSubject<boolean>(false);
+  isAuthenticated: boolean;
 
   constructor(private http: HttpClient, private userService: UserService) {
     this.getAuthFromLocalStorage();
+    this.isAuthenticated$.subscribe((val: boolean) => {
+      this.isAuthenticated = val;
+    });
   }
 
   login(username: string, password: string) {
@@ -29,7 +33,7 @@ export class AuthService {
       })
       .pipe(
         map((resp) => {
-          this.isAuthenticated.next(true);
+          this.isAuthenticated$.next(true);
           this.setAuthInLocalStorage(username, password);
           this.userService.setUserInLocalStorage(resp);
         })
@@ -43,15 +47,20 @@ export class AuthService {
   getAuthFromLocalStorage(): AuthData {
     const jsonString = localStorage.getItem('auth');
     if (!!jsonString) {
-      this.isAuthenticated.next(true);
+      this.isAuthenticated$.next(true);
       return JSON.parse(jsonString);
     }
-    this.isAuthenticated.next(false);
+    this.isAuthenticated$.next(false);
     return null;
   }
 
   getAuthorizationHeader(): string {
     const authInfo = this.getAuthFromLocalStorage();
     return authInfo ? btoa(authInfo.username + ':' + authInfo.password) : null;
+  }
+
+  logout() {
+    this.isAuthenticated$.next(false);
+    localStorage.setItem('auth', '');
   }
 }

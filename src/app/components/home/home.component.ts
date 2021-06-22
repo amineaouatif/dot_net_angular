@@ -4,7 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../services/home.service';
 import { CandidatureDto } from '../../dto/candidature.dto';
 import { User } from '../../dto/user.dto';
-import { EvaluatorService } from 'src/app/services/evaluator.service';
+import { EvaluatorService } from '../../services/evaluator.service';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-home',
@@ -16,24 +17,37 @@ export class HomeComponent implements OnInit {
   candidats: CandidatureDto[] = [];
   constructor(
     readonly homeService: HomeService,
-    readonly evaluatorService: EvaluatorService
+    readonly evaluatorService: EvaluatorService,
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {
-    this.homeService.getEvaluators().subscribe((evals) => {
-      this.evaluateurs = evals;
-      console.log(this.evaluateurs);
-    });
-    this.homeService.getAllCandidatures().subscribe((candidatures) => {
-      this.candidats = candidatures;
-    });
+    this.loadingService.loading$.next(true);
+    this.homeService
+      .getEvaluators()
+      .subscribe((evals) => {
+        this.evaluateurs = evals;
+        console.log(this.evaluateurs);
+      })
+      .add(() => this.loadingService.loading$.next(false));
+
+    this.homeService
+      .getAllCandidatures()
+      .subscribe((candidatures) => {
+        this.candidats = candidatures;
+      })
+      .add(() => this.loadingService.loading$.next(false));
   }
 
   toggleBlock(id: number) {
-    this.evaluatorService.toggleEvaluatorBlock(id).subscribe(() => {
-      this.evaluateurs.map((evaluator) => {
-        if (evaluator.id == id) evaluator.blocked = !evaluator.blocked;
-      });
-    });
+    this.loadingService.loading$.next(true);
+    this.evaluatorService
+      .toggleEvaluatorBlock(id)
+      .subscribe(() => {
+        this.evaluateurs.map((evaluator) => {
+          if (evaluator.id == id) evaluator.blocked = !evaluator.blocked;
+        });
+      })
+      .add(() => this.loadingService.loading$.next(false));
   }
 }

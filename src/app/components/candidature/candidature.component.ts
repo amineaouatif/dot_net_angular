@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from '../../services/notification.service';
 import { CandidatureService } from '../../services/candidature.service';
-
 import { Candidature, JustificatifLight } from '../../interfaces/candidature';
 import { MatStepper } from '@angular/material/stepper';
+import { LoadingService } from '../../services/loading.service';
 
 interface Justificatif {
   id: string;
@@ -85,7 +85,8 @@ export class CandidatureComponent implements OnInit {
 
   constructor(
     readonly candidatureService: CandidatureService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private loadingService: LoadingService
   ) {
     this.createForms();
   }
@@ -94,6 +95,7 @@ export class CandidatureComponent implements OnInit {
 
   submit(stepper: MatStepper) {
     if (this.donneesPersonnelles.valid && this.passageCadreGrade.valid) {
+      this.loadingService.loading$.next(true);
       this.candidature.donneesPersonnelles = this.donneesPersonnelles.value;
       this.candidature.passageCadreGrade = this.passageCadreGrade.value;
 
@@ -212,23 +214,26 @@ export class CandidatureComponent implements OnInit {
         encadrementScientifique,
         responsabilitesScientifiques,
       };
-      this.candidatureService.addCandidature(this.candidature).subscribe(
-        (resp: any) => {
-          console.log(resp);
-          this.notificationService.notification$.next(
-            'Candidature envoyé avec succès.'
-          );
-          this.createForms();
-          this.candidature = <Candidature>{};
-          stepper.reset();
-          this.tokenCandidature = resp.refrenceToken;
-        },
-        (error) => {
-          this.notificationService.notification$.next(
-            "Une erreur s'est produite."
-          );
-        }
-      );
+      this.candidatureService
+        .addCandidature(this.candidature)
+        .subscribe(
+          (resp: any) => {
+            console.log(resp);
+            this.notificationService.notification$.next(
+              'Candidature envoyé avec succès.'
+            );
+            this.createForms();
+            this.candidature = <Candidature>{};
+            stepper.reset();
+            this.tokenCandidature = resp.refrenceToken;
+          },
+          (error) => {
+            this.notificationService.notification$.next(
+              "Une erreur s'est produite."
+            );
+          }
+        )
+        .add(() => this.loadingService.loading$.next(false));
     } else {
       this.validateAllFormFields(this.donneesPersonnelles);
       this.validateAllFormFields(this.passageCadreGrade);
