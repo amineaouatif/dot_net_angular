@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { User } from '../dto/user.dto';
+import { SimpleCandidature } from '../dto/simpleCandidature.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -11,5 +12,11 @@ export class HomeService {
   constructor(private http: HttpClient) {}
   getEvaluators(): Observable<User[]> {
     return this.http.get<User[]>(`${environment.api}/users/evaluators`);
+  }
+
+  getAllCandidatures(): Observable<SimpleCandidature[]> {
+    return this.http.get<SimpleCandidature[]>(
+      `${environment.api}/candidature/all`
+    );
   }
 }
