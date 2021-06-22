@@ -11,7 +11,7 @@
   }
   .user-box{
       width : 90%;
-      height:75%;
+      height:65%;
   }
   .add-user-wrapper .full-width,
   .add-user-wrapper .btn-block {
@@ -42,9 +42,4 @@
     line-height: 45px;
     background: #fff7fa;
   }
- .add-user-btn-radio{
-     margin-right:2.5rem;
-     margin-top:1rem;
-     margin-bottom: 1rem;
- } 
  
