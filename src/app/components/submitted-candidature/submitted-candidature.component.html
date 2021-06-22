@@ -1,0 +1,1135 @@
+<div class="evaluation-container">
+  <mat-card class="header-card mat-elevation-z2">
+    <h1 class="evaluation-first-title">Évaluation du dossier</h1>
+  </mat-card>
+
+  <mat-card class="evaluation-card mat-elevation-z2">
+    <div class="evaluation-titre">Données personnelles</div>
+
+    <mat-divider></mat-divider>
+    <div class="evaluation-info-row">
+      <div class="evaluation-attr">Nom :</div>
+      <div class="evaluation-value">
+        {{ candidature?.donneesPersonnelles.nom }}
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="evaluation-info-row">
+      <div class="evaluation-attr">Prenom :</div>
+      <div class="evaluation-value">
+        {{ candidature?.donneesPersonnelles.prenom }}
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="evaluation-info-row">
+      <div class="evaluation-attr">Departement :</div>
+      <div class="evaluation-value">
+        {{ candidature?.donneesPersonnelles.departement }}
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="evaluation-info-row">
+      <div class="evaluation-attr">Date de recrutement :</div>
+      <div class="evaluation-value">
+        {{
+          candidature?.donneesPersonnelles.dateRecrutement | date: "shortDate"
+        }}
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="evaluation-info-row">
+      <div class="evaluation-attr">Grade actuel :</div>
+      <div class="evaluation-value">
+        {{ candidature?.donneesPersonnelles.grade.name }}
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="evaluation-info-row">
+      <div class="evaluation-attr">Téléphone :</div>
+      <div class="evaluation-value">
+        {{ candidature?.donneesPersonnelles.telephone }}
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="evaluation-info-row">
+      <div class="evaluation-attr">Fax :</div>
+      <div class="evaluation-value">
+        {{ candidature?.donneesPersonnelles.fax }}
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="evaluation-info-row">
+      <div class="evaluation-attr">E-mail :</div>
+      <div class="evaluation-value">
+        {{ candidature?.donneesPersonnelles.email }}
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="evaluation-titre">Type de passage, Cadre et Grade</div>
+    <mat-divider></mat-divider>
+    <div class="evaluation-info-row">
+      <div class="evaluation-attr">Type d’avancement :</div>
+      <div class="evaluation-value">
+        {{ candidature?.passageCadreGrade.typePassage }}
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="evaluation-info-row">
+      <div class="evaluation-attr">Cadre et grade :</div>
+      <div class="evaluation-value">
+        {{ candidature?.passageCadreGrade.cadreGrade }}
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="evaluation-card mat-elevation-z2">
+    <div class="evaluation-titre">Activités Pédagogiques</div>
+    <mat-divider></mat-divider>
+
+    <div class="evaluation-sub-container">
+      <div class="evaluation-titre-secondaire">Production pédagogique</div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">Ouvrages ou manuels :</div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesPedagogiques
+                .productionPedagogique.ouvragesManuels
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesPedagogiques.productionPedagogique
+              .ouvragesManuels?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">Polycopiés d’enseignement :</div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesPedagogiques
+                .productionPedagogique.polycopiesEnseignement
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesPedagogiques.productionPedagogique
+              .polycopiesEnseignement?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">Supports et procédés didactiques :</div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesPedagogiques
+                .productionPedagogique.supportsProcedesDidactiques
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesPedagogiques.productionPedagogique
+              .supportsProcedesDidactiques?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-titre-secondaire">Encadrement pédagogique</div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">
+            Encadrement de projets - PFE Cycle Ingénieur :
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesPedagogiques
+                .encadrementPedagogique.encadrementProjetsPFE
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesPedagogiques.encadrementPedagogique
+              .encadrementProjetsPFE?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">
+            Encadrement de projets - PFA Cycle Ingénieur :
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesPedagogiques
+                .encadrementPedagogique.encadrementProjetsPFA
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesPedagogiques.encadrementPedagogique
+              .encadrementProjetsPFA?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">Mémoires de fin d’études - Master :</div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesPedagogiques
+                .encadrementPedagogique.memoiresFinEtudesMaster
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesPedagogiques.encadrementPedagogique
+              .memoiresFinEtudesMaster?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">Encadrement de stages :</div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesPedagogiques
+                .encadrementPedagogique.encadrementStages
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesPedagogiques.encadrementPedagogique
+              .encadrementStages?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">
+            Encadrement de ressources humaines :
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesPedagogiques
+                .encadrementPedagogique.encadrementRessourcesHumaines
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesPedagogiques.encadrementPedagogique
+              .encadrementRessourcesHumaines?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-titre-secondaire">
+        Responsabilités pédagogiques et administratives
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">Gestion d’un département :</div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesPedagogiques
+                .responsabilitesPedagogiquesAdministratives.gestionDepartement
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesPedagogiques
+              .responsabilitesPedagogiquesAdministratives.gestionDepartement
+              ?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">
+            Responsable de Filière ou de Module :
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesPedagogiques
+                .responsabilitesPedagogiquesAdministratives
+                .responsableFiliereModule
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesPedagogiques
+              .responsabilitesPedagogiquesAdministratives
+              .responsableFiliereModule?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">
+            Gestion d’une formation universitaire :
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesPedagogiques
+                .responsabilitesPedagogiquesAdministratives
+                .gestionFormationUniversitaire
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesPedagogiques
+              .responsabilitesPedagogiquesAdministratives
+              .gestionFormationUniversitaire?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">Enseignement de Master :</div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesPedagogiques
+                .responsabilitesPedagogiquesAdministratives.enseignementMaster
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesPedagogiques
+              .responsabilitesPedagogiquesAdministratives.enseignementMaster
+              ?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">Membre du Conseil d’Université :</div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesPedagogiques
+                .responsabilitesPedagogiquesAdministratives
+                .membreConseilUniversite
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesPedagogiques
+              .responsabilitesPedagogiquesAdministratives
+              .membreConseilUniversite?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">Membre de Commission Paritaire :</div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesPedagogiques
+                .responsabilitesPedagogiquesAdministratives
+                .membreCommissionParitaire
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesPedagogiques
+              .responsabilitesPedagogiquesAdministratives
+              .membreCommissionParitaire?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">
+            Membre du Conseil de l’Etablissement :
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesPedagogiques
+                .responsabilitesPedagogiquesAdministratives
+                .membreConseilEtablissement
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesPedagogiques
+              .responsabilitesPedagogiquesAdministratives
+              .membreConseilEtablissement?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">
+            Membre de la Commission scientifique de l’Etablissement :
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesPedagogiques
+                .responsabilitesPedagogiquesAdministratives
+                .membreCommissionScientifique
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesPedagogiques
+              .responsabilitesPedagogiquesAdministratives
+              .membreCommissionScientifique?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">
+            Membre des commissions de réforme ou d’expertise pédagogique
+            nationale ou internationale :
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesPedagogiques
+                .responsabilitesPedagogiquesAdministratives
+                .membreCommissionReformeExpertisePedagogique
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesPedagogiques
+              .responsabilitesPedagogiquesAdministratives
+              .membreCommissionReformeExpertisePedagogique?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+    <div class="evaluation-titre">Activités de Recherche</div>
+    <mat-divider></mat-divider>
+
+    <div class="evaluation-sub-container">
+      <div class="evaluation-titre-secondaire">Production scientifique</div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">
+            Articles scientifiques dans des revues spécialisées - Catégorie 1 :
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesRecherche.productionScientifique
+                .articlesScientifiquesCategorie1
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesRecherche.productionScientifique
+              .articlesScientifiquesCategorie1?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">
+            Articles scientifiques dans des revues spécialisées - Catégorie 2 :
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesRecherche.productionScientifique
+                .articlesScientifiquesCategorie2
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesRecherche.productionScientifique
+              .articlesScientifiquesCategorie2?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">
+            Ouvrages de recherche scientifiques :
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesRecherche.productionScientifique
+                .ouvragesRechercheScientifiques
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesRecherche.productionScientifique
+              .ouvragesRechercheScientifiques?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">
+            Publications dans des actes de congrès à comité de lecture :
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesRecherche.productionScientifique
+                .publicationsActesCongres
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesRecherche.productionScientifique
+              .publicationsActesCongres?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">
+            Dépôt de Brevets ou réalisation de prototypes :
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesRecherche.productionScientifique
+                .depotBrevetsRealisationPrototypes
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesRecherche.productionScientifique
+              .depotBrevetsRealisationPrototypes?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-titre-secondaire">Production scientifique</div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">
+            Encadrement ou et co-encadrement de thèses de doctorat :
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesRecherche
+                .encadrementScientifique.encadrementCoencadrementThesesDoctorat
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesRecherche.encadrementScientifique
+              .encadrementCoencadrementThesesDoctorat?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">
+            Encadrement ou et co-encadrement de travaux de recherche (Master) :
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesRecherche
+                .encadrementScientifique
+                .encadrementCoencadrementTravauxRechercheMaster
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesRecherche.encadrementScientifique
+              .encadrementCoencadrementTravauxRechercheMaster?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">
+            Rapporteur ou Membre de jury de thèse ou habilitation scientifique :
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesRecherche
+                .encadrementScientifique.rapporteurMembreJuryNote
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesRecherche.encadrementScientifique
+              .rapporteurMembreJuryNote?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-titre-secondaire">
+        Responsabilités scientifiques
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">Laboratoire, Equipe et CED :</div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesRecherche
+                .responsabilitesScientifiques.laboratoireEquipeCed
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesRecherche.responsabilitesScientifiques
+              .laboratoireEquipeCed?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">
+            Pôles de Compétence et Réseaux (nationaux ou internationaux) :
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesRecherche
+                .responsabilitesScientifiques.polesCompetenceReseaux
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesRecherche.responsabilitesScientifiques
+              .polesCompetenceReseaux?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">CED, Doctorat, Master :</div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesRecherche
+                .responsabilitesScientifiques.cedDoctoratMaster
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesRecherche.responsabilitesScientifiques
+              .cedDoctoratMaster?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">
+            Projets ou contrats de recherche financés :
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesRecherche
+                .responsabilitesScientifiques.projetsContratsRechercheFinances
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesRecherche.responsabilitesScientifiques
+              .projetsContratsRechercheFinances?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">
+            Activités d’expertise, d’évaluations scientifiques, nationales ou
+            internationales :
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesRecherche
+                .responsabilitesScientifiques
+                .activitesExpertiseEvaluationsScientifiques
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesRecherche.responsabilitesScientifiques
+              .activitesExpertiseEvaluationsScientifiques?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">
+            Organisation de manifestations scientifiques nationales ou
+            internationales :
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesRecherche
+                .responsabilitesScientifiques
+                .organisationManifestationsScientifiques
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesRecherche.responsabilitesScientifiques
+              .organisationManifestationsScientifiques?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+
+      <div class="evaluation-justificatif-row">
+        <div class="evaluation-attr-container">
+          <div class="evaluation-attr">Organisation de séminaire :</div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="
+              let item of candidature?.activitesRecherche
+                .responsabilitesScientifiques.organisationSeminaire
+            "
+            matRipple
+            class="mat-list-action"
+            role="listitem"
+            (click)="download(item.fileName)"
+          >
+            <mat-icon mat-list-icon color="primary">upload_file</mat-icon>
+            <div mat-line>{{ item.documentName }}</div>
+            <div mat-line>{{ item.fileName }}</div>
+          </mat-list-item>
+        </mat-list>
+        <div
+          *ngIf="
+            candidature?.activitesRecherche.responsabilitesScientifiques
+              .organisationSeminaire?.length === 0
+          "
+        >
+          Vide.
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

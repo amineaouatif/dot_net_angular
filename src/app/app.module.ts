@@ -29,6 +29,7 @@ import { JustificatifComponent } from './components/justificatif/justificatif.co
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { EvaluationComponent } from './components/evaluation/evaluation.component';
 import { NoteComponent } from './components/note/note.component';
+import { SubmittedCandidatureComponent } from './components/submitted-candidature/submitted-candidature.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { NoteComponent } from './components/note/note.component';
     AddUserComponent,
     EvaluationComponent,
     NoteComponent,
+    SubmittedCandidatureComponent,
   ],
   imports: [
     BrowserModule,

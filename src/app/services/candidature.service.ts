@@ -20,4 +20,10 @@ export class CandidatureService {
       }
     );
   }
+  getCandidatureByToken(token: string): Observable<CandidatureDto> {
+    return this.http.get<CandidatureDto>(
+      `${environment.api}/candidature/submitted`,
+      { params: { token: token } }
+    );
+  }
 }

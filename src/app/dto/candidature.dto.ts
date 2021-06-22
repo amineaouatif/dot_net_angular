@@ -1,6 +1,8 @@
+import { Candidature } from '../interfaces/candidature';
+
 export interface CandidatureDto {
   id: number;
-  candidature: string;
+  jsonContent: string;
   candidateLastName: string;
   candidateFirstName: string;
   refrenceToken: string;
