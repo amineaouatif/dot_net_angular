@@ -1,0 +1,13 @@
+.note-container {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-left: 10px;
+}
+.increment {
+  margin-left: 15px;
+}
+.note {
+  margin-bottom: -2px;
+}

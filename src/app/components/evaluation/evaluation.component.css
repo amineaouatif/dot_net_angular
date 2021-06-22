@@ -1,0 +1,67 @@
+.evaluation-container {
+  padding: 50px;
+}
+
+.header-card {
+  padding: 50px 50px;
+}
+
+.evaluation-first-title {
+  font-size: 2.5rem;
+  font-weight: 100;
+  text-align: center;
+}
+
+.evaluation-card {
+  padding: 25px;
+  margin-top: 40px;
+}
+
+.evaluation-titre {
+  font-size: 1.4rem;
+  font-weight: 100;
+  margin: 20px 10px 20px 0;
+}
+
+.evaluation-titre-secondaire {
+  font-size: 1.3rem;
+  font-weight: 100;
+  margin: 50px 0 25px 0;
+}
+
+.evaluation-info-row {
+  display: flex;
+  padding: 15px 0 15px 40px;
+}
+
+.evaluation-attr-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.evaluation-attr {
+  font-size: medium;
+  margin-right: 25px;
+  font-weight: 500;
+}
+
+.evaluation-value {
+  font-size: medium;
+}
+
+.evaluation-sub-container {
+  padding: 10px 25px;
+}
+
+.evaluation-justificatif-row {
+  padding: 0 10px;
+}
+
+.mat-list-action {
+  cursor: pointer;
+}
+
+.mat-list-action:hover {
+  background: rgba(0, 0, 0, 0.04);
+}

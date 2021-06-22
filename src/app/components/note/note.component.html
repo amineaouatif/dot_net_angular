@@ -1,0 +1,25 @@
+<div class="note-container">
+  <div class="note">{{ data }} / {{ noteTotale }}</div>
+  <div class="increment">
+    <button
+      (click)="increment()"
+      mat-icon-button
+      aria-label="Incrémenter"
+      [disabled]="incrementDisabled || disbaled"
+    >
+      <mat-icon [color]="incrementDisabled || disbaled ? '' : 'primary'"
+        >add_circle</mat-icon
+      >
+    </button>
+    <button
+      (click)="decrement()"
+      mat-icon-button
+      aria-label="Décrémenter"
+      [disabled]="decrementDisabled || disbaled"
+    >
+      <mat-icon [color]="decrementDisabled || disbaled ? '' : 'primary'"
+        >remove_circle</mat-icon
+      >
+    </button>
+  </div>
+</div>

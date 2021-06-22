@@ -32,7 +32,7 @@ export class JustificatifComponent implements OnInit {
   @Input() data: Array<Justificatif> = [];
   @Input() title: string;
 
-  @Output() onDataChange: EventEmitter<Array<Justificatif>> = new EventEmitter<
+  @Output() dataChange: EventEmitter<Array<Justificatif>> = new EventEmitter<
     Array<Justificatif>
   >();
 
@@ -47,9 +47,7 @@ export class JustificatifComponent implements OnInit {
     private notificationService: NotificationService
   ) {}
 
-  dataChange() {
-    this.onDataChange.emit(this.data);
-  }
+  ngOnInit(): void {}
 
   addElement() {
     this.isUploading = true;
@@ -68,7 +66,7 @@ export class JustificatifComponent implements OnInit {
             });
             this.fileName = '';
             this.documentName = '';
-            this.dataChange();
+            this.onDataChange();
           },
           (error) => {
             console.log(error);
@@ -81,7 +79,7 @@ export class JustificatifComponent implements OnInit {
     }
   }
 
-  uploadFileEvt(imgFile: any) {
+  prepareFileUpload(imgFile: any) {
     const files = imgFile.target.files;
     if (files && files[0]) {
       const file = files[0];
@@ -96,8 +94,10 @@ export class JustificatifComponent implements OnInit {
 
   delete(id: string) {
     this.data = this.data.filter((element: Justificatif) => element.id !== id);
-    this.dataChange();
+    this.onDataChange();
   }
 
-  ngOnInit(): void {}
+  private onDataChange() {
+    this.dataChange.emit(this.data);
+  }
 }

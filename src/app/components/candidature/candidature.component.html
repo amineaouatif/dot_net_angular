@@ -189,12 +189,12 @@
               [(data)]="responsableFiliereModule"
             ></app-justificatif>
             <app-justificatif
-              title="Gestion d’une formation universitaire - Années préparatoires"
-              [(data)]="gestionFormationUniversitairePrepa"
+              title="Gestion d’une formation universitaire"
+              [(data)]="gestionFormationUniversitaire"
             ></app-justificatif>
             <app-justificatif
-              title="Gestion d’une formation universitaire - Cycle Ingénieur"
-              [(data)]="gestionFormationUniversitaireIng"
+              title="Enseignement de Master"
+              [(data)]="enseignementMaster"
             ></app-justificatif>
             <app-justificatif
               title="Membre du Conseil d’Université"
@@ -241,6 +241,10 @@
               title="Publications dans des actes de congrès à comité de lecture"
               [(data)]="publicationsActesCongres"
             ></app-justificatif>
+            <app-justificatif
+              title="Dépôt de Brevets ou réalisation de prototypes"
+              [(data)]="depotBrevetsRealisationPrototypes"
+            ></app-justificatif>
           </mat-step>
 
           <mat-step>
@@ -257,7 +261,7 @@
             ></app-justificatif>
             <app-justificatif
               title="Rapporteur ou Membre de jury de thèse ou habilitation scientifique"
-              [(data)]="RapporteurMembreJury"
+              [(data)]="rapporteurMembreJuryNote"
             ></app-justificatif>
           </mat-step>
 

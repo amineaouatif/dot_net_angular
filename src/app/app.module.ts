@@ -27,7 +27,9 @@ import { CandidatureComponent } from './components/candidature/candidature.compo
 import { AuthorizationInterceptor } from './interceptors/authorization.interceptor';
 import { JustificatifComponent } from './components/justificatif/justificatif.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import { EvaluationComponent } from './components/evaluation/evaluation.component';
+import { NoteComponent } from './components/note/note.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +41,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     CandidatureComponent,
     JustificatifComponent,
     AddUserComponent,
+    EvaluationComponent,
+    NoteComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     FormsModule,
     FlexLayoutModule,
     HttpClientModule,
-    MatDialogModule,
   ],
   providers: [
     {

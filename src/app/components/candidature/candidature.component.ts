@@ -1,83 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Candidature, JustificatifLight } from '../../interfaces/candidature';
 
 interface Justificatif {
   id: string;
   remoteFileName: string;
   localFileName: string;
   documentName: string;
-}
-
-interface JustificatifLight {
-  fileName: string;
-  documentName: string;
-}
-
-interface Candidature {
-  donneesPersonnelles: {
-    nom: string;
-    prenom: string;
-    departement: string;
-    dateRecrutement: string;
-    grade: string;
-    telephone: string;
-    fax: string;
-    email: string;
-  };
-
-  passageCadreGrade: {
-    typePassage: string;
-    cadreGrade: string;
-  };
-
-  activitesPedagogiques: {
-    productionPedagogique: {
-      ouvragesManuels: Array<JustificatifLight>;
-      polycopiesEnseignement: Array<JustificatifLight>;
-      supportsProcedesDidactiques: Array<JustificatifLight>;
-    };
-    encadrementPedagogique: {
-      encadrementProjetsPFE: Array<JustificatifLight>;
-      encadrementProjetsPFA: Array<JustificatifLight>;
-      memoiresFinEtudesMaster: Array<JustificatifLight>;
-      encadrementStages: Array<JustificatifLight>;
-      encadrementRessourcesHumaines: Array<JustificatifLight>;
-    };
-    responsabilitesPedagogiquesAdministratives: {
-      gestionDepartement: Array<JustificatifLight>;
-      responsableFiliereModule: Array<JustificatifLight>;
-      gestionFormationUniversitairePrepa: Array<JustificatifLight>;
-      gestionFormationUniversitaireIng: Array<JustificatifLight>;
-      membreConseilUniversite: Array<JustificatifLight>;
-      membreCommissionParitaire: Array<JustificatifLight>;
-      membreConseilEtablissement: Array<JustificatifLight>;
-      membreCommissionScientifique: Array<JustificatifLight>;
-      membreCommissionReformeExpertisePedagogique: Array<JustificatifLight>;
-    };
-  };
-
-  activitesRecherche: {
-    productionScientifique: {
-      articlesScientifiquesCategorie1: Array<JustificatifLight>;
-      articlesScientifiquesCategorie2: Array<JustificatifLight>;
-      ouvragesRechercheScientifiques: Array<JustificatifLight>;
-      publicationsActesCongres: Array<JustificatifLight>;
-    };
-    encadrementScientifique: {
-      encadrementCoencadrementThesesDoctorat: Array<JustificatifLight>;
-      encadrementCoencadrementTravauxRechercheMaster: Array<JustificatifLight>;
-      RapporteurMembreJury: Array<JustificatifLight>;
-    };
-    responsabilitesScientifiques: {
-      laboratoireEquipeCed: Array<JustificatifLight>;
-      polesCompetenceReseaux: Array<JustificatifLight>;
-      cedDoctoratMaster: Array<JustificatifLight>;
-      projetsContratsRechercheFinances: Array<JustificatifLight>;
-      activitesExpertiseEvaluationsScientifiques: Array<JustificatifLight>;
-      organisationManifestationsScientifiques: Array<JustificatifLight>;
-      organisationSeminaire: Array<JustificatifLight>;
-    };
-  };
 }
 
 @Component({
@@ -134,8 +63,8 @@ export class CandidatureComponent implements OnInit {
 
   gestionDepartement: Array<Justificatif> = [];
   responsableFiliereModule: Array<Justificatif> = [];
-  gestionFormationUniversitairePrepa: Array<Justificatif> = [];
-  gestionFormationUniversitaireIng: Array<Justificatif> = [];
+  gestionFormationUniversitaire: Array<Justificatif> = [];
+  enseignementMaster: Array<Justificatif> = [];
   membreConseilUniversite: Array<Justificatif> = [];
   membreCommissionParitaire: Array<Justificatif> = [];
   membreConseilEtablissement: Array<Justificatif> = [];
@@ -146,10 +75,11 @@ export class CandidatureComponent implements OnInit {
   articlesScientifiquesCategorie2: Array<Justificatif> = [];
   ouvragesRechercheScientifiques: Array<Justificatif> = [];
   publicationsActesCongres: Array<Justificatif> = [];
+  depotBrevetsRealisationPrototypes: Array<Justificatif> = [];
 
   encadrementCoencadrementThesesDoctorat: Array<Justificatif> = [];
   encadrementCoencadrementTravauxRechercheMaster: Array<Justificatif> = [];
-  RapporteurMembreJury: Array<Justificatif> = [];
+  rapporteurMembreJuryNote: Array<Justificatif> = [];
 
   laboratoireEquipeCed: Array<Justificatif> = [];
   polesCompetenceReseaux: Array<Justificatif> = [];
@@ -198,12 +128,10 @@ export class CandidatureComponent implements OnInit {
       responsableFiliereModule: this.lightenJustificatif(
         this.responsableFiliereModule
       ),
-      gestionFormationUniversitairePrepa: this.lightenJustificatif(
-        this.gestionFormationUniversitairePrepa
+      gestionFormationUniversitaire: this.lightenJustificatif(
+        this.gestionFormationUniversitaire
       ),
-      gestionFormationUniversitaireIng: this.lightenJustificatif(
-        this.gestionFormationUniversitaireIng
-      ),
+      enseignementMaster: this.lightenJustificatif(this.enseignementMaster),
       membreConseilUniversite: this.lightenJustificatif(
         this.membreConseilUniversite
       ),
@@ -233,6 +161,9 @@ export class CandidatureComponent implements OnInit {
       publicationsActesCongres: this.lightenJustificatif(
         this.publicationsActesCongres
       ),
+      depotBrevetsRealisationPrototypes: this.lightenJustificatif(
+        this.depotBrevetsRealisationPrototypes
+      ),
     };
 
     const encadrementScientifique = {
@@ -242,7 +173,7 @@ export class CandidatureComponent implements OnInit {
       encadrementCoencadrementTravauxRechercheMaster: this.lightenJustificatif(
         this.encadrementCoencadrementTravauxRechercheMaster
       ),
-      RapporteurMembreJury: this.lightenJustificatif(this.RapporteurMembreJury),
+      rapporteurMembreJuryNote: this.lightenJustificatif(this.rapporteurMembreJuryNote),
     };
 
     const responsabilitesScientifiques = {
@@ -278,6 +209,7 @@ export class CandidatureComponent implements OnInit {
     };
 
     console.log(this.candidature);
+    console.log(JSON.stringify(this.candidature));
   }
 
   private lightenJustificatif(
