@@ -31,5 +31,18 @@ export class CandidatureService {
       `${environment.api}/candidature/` + id
     );
   }
-  // updateCandidature(id: int )
+  updateCandidature(
+    id: number,
+    note: number,
+    validation: number
+  ): Observable<CandidatureDto> {
+    return this.http.post<CandidatureDto>(
+      `${environment.api}/candidature/update `,
+      {
+        id: id,
+        note: note.toString,
+        validated: validation,
+      }
+    );
+  }
 }
