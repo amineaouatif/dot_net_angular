@@ -15,6 +15,7 @@ export class EvaluationComponent implements OnInit {
   candidature: Candidature;
 
   note = 0;
+  validated = 0;
 
   ouvragesManuelsNote = 0;
   polycopiesEnseignementNote = 0;
@@ -118,4 +119,8 @@ export class EvaluationComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  submit(validation: number) {
+    // this.candidatureService.updateCandidature(this.candidature.id)
+  }
 }

@@ -31,4 +31,5 @@ export class CandidatureService {
       `${environment.api}/candidature/` + id
     );
   }
+  // updateCandidature(id: int )
 }
