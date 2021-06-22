@@ -16,3 +16,11 @@
   left: 0;
   top: 0;
 }
+
+.block-cell {
+  color: red;
+}
+
+.unblock-cell {
+  color: green;
+}

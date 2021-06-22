@@ -4,6 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../services/home.service';
 import { SimpleCandidature } from '../../dto/simpleCandidature.dto';
 import { User } from '../../dto/user.dto';
+import { UserService } from 'src/app/services/user.service';
+
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +16,11 @@ import { User } from '../../dto/user.dto';
 export class HomeComponent implements OnInit {
   evaluateurs: User[] = [];
   candidats: SimpleCandidature[] = [];
-  constructor(readonly homeService: HomeService) {}
+  constructor(
+    readonly homeService: HomeService,
+    readonly userService: UserService,
+    readonly dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.homeService.getEvaluators().subscribe((evals) => {
@@ -22,6 +29,13 @@ export class HomeComponent implements OnInit {
     });
     this.homeService.getAllCandidatures().subscribe((candidatures) => {
       this.candidats = candidatures;
+    });
+  }
+
+  toggleBlock(id: number) {
+    this.userService.toggleEvaluatorBlock(id);
+    this.evaluateurs.map((evaluator) => {
+      if (evaluator.id == id) evaluator.blocked = !evaluator.blocked;
     });
   }
 }

@@ -27,6 +27,7 @@ import { CandidatureComponent } from './components/candidature/candidature.compo
 import { AuthorizationInterceptor } from './interceptors/authorization.interceptor';
 import { JustificatifComponent } from './components/justificatif/justificatif.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +49,7 @@ import { AddUserComponent } from './components/add-user/add-user.component';
     FormsModule,
     FlexLayoutModule,
     HttpClientModule,
+    MatDialogModule,
   ],
   providers: [
     {
@@ -55,7 +57,6 @@ import { AddUserComponent } from './components/add-user/add-user.component';
       useClass: AuthorizationInterceptor,
       multi: true,
     },
-  
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

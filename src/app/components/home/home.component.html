@@ -60,23 +60,38 @@
               </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="departement">
-              <mat-header-cell *matHeaderCellDef>Département</mat-header-cell>
+            <!-- TODO: Temporary -->
+            <ng-container matColumnDef="prenom">
+              <mat-header-cell *matHeaderCellDef>Prénom</mat-header-cell>
               <mat-cell *matCellDef="let row">
                 {{ row.lastName }}
               </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="grade">
-              <mat-header-cell *matHeaderCellDef>Grade actuel</mat-header-cell>
-              <mat-cell *matCellDef="let row"> {{ row.role }} </mat-cell>
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+              <mat-cell
+                *matCellDef="let row"
+                [ngClass]="{
+                  'block-cell': !row.blocked,
+                  'unblock-cell': row.blocked
+                }"
+              >
+                <span
+                  style="cursor: pointer; user-select: none"
+                  (click)="toggleBlock(row.id)"
+                  >{{
+                    row.blocked ? "Débloquer Compte" : "Bloquer Compte"
+                  }}</span
+                >
+              </mat-cell>
             </ng-container>
 
             <mat-header-row
-              *matHeaderRowDef="['nom', 'departement', 'grade']"
+              *matHeaderRowDef="['nom', 'prenom', 'action']"
             ></mat-header-row>
             <mat-row
-              *matRowDef="let row; columns: ['nom', 'departement', 'grade']"
+              *matRowDef="let row; columns: ['nom', 'prenom', 'action']"
             ></mat-row>
           </mat-table>
         </div>
