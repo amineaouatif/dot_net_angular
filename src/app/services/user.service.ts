@@ -16,8 +16,4 @@ export class UserService {
     const jsonString = localStorage.getItem('user');
     return !!jsonString ? JSON.parse(jsonString) : null;
   }
-
-  toggleEvaluatorBlock(id: number) {
-    this.http.get(`${environment.api}` + 'users/evaluators/' + id);
-  }
 }
