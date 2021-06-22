@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from '../../services/notification.service';
 import { EvaluatorService } from '../../services/evaluator.service';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-add-user',
@@ -20,13 +21,15 @@ export class AddUserComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private evaluatorService: EvaluatorService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {}
 
   onSubmit() {
     if (this.credentials.valid) {
+      this.loadingService.loading$.next(true);
       this.evaluatorService
         .addEvaluator({
           Username: this.credentials.value.username,
@@ -43,7 +46,8 @@ export class AddUserComponent implements OnInit {
               "La creation de l'evaluateur a echoué"
             );
           }
-        );
+        )
+        .add(() => this.loadingService.loading$.next(false));
     } else {
       this.notificationService.notification$.next(
         'Les données ne sont pas valides.'

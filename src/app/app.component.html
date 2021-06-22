@@ -7,11 +7,21 @@
       mat-raised-button
       mat-button
       routerLink="login"
-      routerLinkActive="active"
     >
       Se connecter
+    </a>
+    <a
+      *ngIf="isAuth"
+      mat-button
+      mat-raised-button
+      mat-button
+      (click)="logout()"
+    >
+      Se déconnecter
     </a>
   </span>
 </mat-toolbar>
 <div style="height: 64px"></div>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
 <router-outlet></router-outlet>
