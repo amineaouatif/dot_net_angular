@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Candidature, JustificatifLight } from '../../interfaces/candidature';
+import { NotificationService } from '../../services/notification.service';
 import { CandidatureService } from '../../services/candidature.service';
+
+import { Candidature, JustificatifLight } from '../../interfaces/candidature';
+import { MatStepper } from '@angular/material/stepper';
+
 interface Justificatif {
   id: string;
   remoteFileName: string;
@@ -35,21 +39,9 @@ export class CandidatureComponent implements OnInit {
     { name: 'Passage Normal', value: 'N' },
   ];
 
-  donneesPersonnelles = new FormGroup({
-    nom: new FormControl('', Validators.required),
-    prenom: new FormControl('', Validators.required),
-    departement: new FormControl('', Validators.required),
-    dateRecrutement: new FormControl('', Validators.required),
-    grade: new FormControl('', Validators.required),
-    telephone: new FormControl('', Validators.required),
-    fax: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
-  });
+  donneesPersonnelles: FormGroup;
 
-  passageCadreGrade = new FormGroup({
-    typePassage: new FormControl('', Validators.required),
-    cadreGrade: new FormControl('', Validators.required),
-  });
+  passageCadreGrade: FormGroup;
 
   ouvragesManuels: Array<Justificatif> = [];
   polycopiesEnseignement: Array<Justificatif> = [];
@@ -89,133 +81,184 @@ export class CandidatureComponent implements OnInit {
   organisationManifestationsScientifiques: Array<Justificatif> = [];
   organisationSeminaire: Array<Justificatif> = [];
 
-  constructor(readonly candidatureService: CandidatureService) {}
+  constructor(
+    readonly candidatureService: CandidatureService,
+    private notificationService: NotificationService
+  ) {
+    this.createForms();
+  }
 
   ngOnInit(): void {}
 
-  submit() {
-    this.candidature.donneesPersonnelles = this.donneesPersonnelles.value;
-    this.candidature.passageCadreGrade = this.passageCadreGrade.value;
+  submit(stepper: MatStepper) {
+    if (this.donneesPersonnelles.valid && this.passageCadreGrade.valid) {
+      this.candidature.donneesPersonnelles = this.donneesPersonnelles.value;
+      this.candidature.passageCadreGrade = this.passageCadreGrade.value;
 
-    const productionPedagogique = {
-      ouvragesManuels: this.lightenJustificatif(this.ouvragesManuels),
-      polycopiesEnseignement: this.lightenJustificatif(
-        this.polycopiesEnseignement
-      ),
-      supportsProcedesDidactiques: this.lightenJustificatif(
-        this.supportsProcedesDidactiques
-      ),
-    };
+      const productionPedagogique = {
+        ouvragesManuels: this.lightenJustificatif(this.ouvragesManuels),
+        polycopiesEnseignement: this.lightenJustificatif(
+          this.polycopiesEnseignement
+        ),
+        supportsProcedesDidactiques: this.lightenJustificatif(
+          this.supportsProcedesDidactiques
+        ),
+      };
 
-    const encadrementPedagogique = {
-      encadrementProjetsPFE: this.lightenJustificatif(
-        this.encadrementProjetsPFE
-      ),
-      encadrementProjetsPFA: this.lightenJustificatif(
-        this.encadrementProjetsPFA
-      ),
-      memoiresFinEtudesMaster: this.lightenJustificatif(
-        this.memoiresFinEtudesMaster
-      ),
-      encadrementStages: this.lightenJustificatif(this.encadrementStages),
-      encadrementRessourcesHumaines: this.lightenJustificatif(
-        this.encadrementRessourcesHumaines
-      ),
-    };
+      const encadrementPedagogique = {
+        encadrementProjetsPFE: this.lightenJustificatif(
+          this.encadrementProjetsPFE
+        ),
+        encadrementProjetsPFA: this.lightenJustificatif(
+          this.encadrementProjetsPFA
+        ),
+        memoiresFinEtudesMaster: this.lightenJustificatif(
+          this.memoiresFinEtudesMaster
+        ),
+        encadrementStages: this.lightenJustificatif(this.encadrementStages),
+        encadrementRessourcesHumaines: this.lightenJustificatif(
+          this.encadrementRessourcesHumaines
+        ),
+      };
 
-    const responsabilitesPedagogiquesAdministratives = {
-      gestionDepartement: this.lightenJustificatif(this.gestionDepartement),
-      responsableFiliereModule: this.lightenJustificatif(
-        this.responsableFiliereModule
-      ),
-      gestionFormationUniversitaire: this.lightenJustificatif(
-        this.gestionFormationUniversitaire
-      ),
-      enseignementMaster: this.lightenJustificatif(this.enseignementMaster),
-      membreConseilUniversite: this.lightenJustificatif(
-        this.membreConseilUniversite
-      ),
-      membreCommissionParitaire: this.lightenJustificatif(
-        this.membreCommissionParitaire
-      ),
-      membreConseilEtablissement: this.lightenJustificatif(
-        this.membreConseilEtablissement
-      ),
-      membreCommissionScientifique: this.lightenJustificatif(
-        this.membreCommissionScientifique
-      ),
-      membreCommissionReformeExpertisePedagogique: this.lightenJustificatif(
-        this.membreCommissionReformeExpertisePedagogique
-      ),
-    };
-    const productionScientifique = {
-      articlesScientifiquesCategorie1: this.lightenJustificatif(
-        this.articlesScientifiquesCategorie1
-      ),
-      articlesScientifiquesCategorie2: this.lightenJustificatif(
-        this.articlesScientifiquesCategorie2
-      ),
-      ouvragesRechercheScientifiques: this.lightenJustificatif(
-        this.ouvragesRechercheScientifiques
-      ),
-      publicationsActesCongres: this.lightenJustificatif(
-        this.publicationsActesCongres
-      ),
-      depotBrevetsRealisationPrototypes: this.lightenJustificatif(
-        this.depotBrevetsRealisationPrototypes
-      ),
-    };
+      const responsabilitesPedagogiquesAdministratives = {
+        gestionDepartement: this.lightenJustificatif(this.gestionDepartement),
+        responsableFiliereModule: this.lightenJustificatif(
+          this.responsableFiliereModule
+        ),
+        gestionFormationUniversitaire: this.lightenJustificatif(
+          this.gestionFormationUniversitaire
+        ),
+        enseignementMaster: this.lightenJustificatif(this.enseignementMaster),
+        membreConseilUniversite: this.lightenJustificatif(
+          this.membreConseilUniversite
+        ),
+        membreCommissionParitaire: this.lightenJustificatif(
+          this.membreCommissionParitaire
+        ),
+        membreConseilEtablissement: this.lightenJustificatif(
+          this.membreConseilEtablissement
+        ),
+        membreCommissionScientifique: this.lightenJustificatif(
+          this.membreCommissionScientifique
+        ),
+        membreCommissionReformeExpertisePedagogique: this.lightenJustificatif(
+          this.membreCommissionReformeExpertisePedagogique
+        ),
+      };
+      const productionScientifique = {
+        articlesScientifiquesCategorie1: this.lightenJustificatif(
+          this.articlesScientifiquesCategorie1
+        ),
+        articlesScientifiquesCategorie2: this.lightenJustificatif(
+          this.articlesScientifiquesCategorie2
+        ),
+        ouvragesRechercheScientifiques: this.lightenJustificatif(
+          this.ouvragesRechercheScientifiques
+        ),
+        publicationsActesCongres: this.lightenJustificatif(
+          this.publicationsActesCongres
+        ),
+        depotBrevetsRealisationPrototypes: this.lightenJustificatif(
+          this.depotBrevetsRealisationPrototypes
+        ),
+      };
 
-    const encadrementScientifique = {
-      encadrementCoencadrementThesesDoctorat: this.lightenJustificatif(
-        this.encadrementCoencadrementThesesDoctorat
-      ),
-      encadrementCoencadrementTravauxRechercheMaster: this.lightenJustificatif(
-        this.encadrementCoencadrementTravauxRechercheMaster
-      ),
-      rapporteurMembreJuryNote: this.lightenJustificatif(
-        this.rapporteurMembreJuryNote
-      ),
-    };
+      const encadrementScientifique = {
+        encadrementCoencadrementThesesDoctorat: this.lightenJustificatif(
+          this.encadrementCoencadrementThesesDoctorat
+        ),
+        encadrementCoencadrementTravauxRechercheMaster:
+          this.lightenJustificatif(
+            this.encadrementCoencadrementTravauxRechercheMaster
+          ),
+        rapporteurMembreJuryNote: this.lightenJustificatif(
+          this.rapporteurMembreJuryNote
+        ),
+      };
 
-    const responsabilitesScientifiques = {
-      laboratoireEquipeCed: this.lightenJustificatif(this.laboratoireEquipeCed),
-      polesCompetenceReseaux: this.lightenJustificatif(
-        this.polesCompetenceReseaux
-      ),
-      cedDoctoratMaster: this.lightenJustificatif(this.cedDoctoratMaster),
-      projetsContratsRechercheFinances: this.lightenJustificatif(
-        this.projetsContratsRechercheFinances
-      ),
-      activitesExpertiseEvaluationsScientifiques: this.lightenJustificatif(
-        this.activitesExpertiseEvaluationsScientifiques
-      ),
-      organisationManifestationsScientifiques: this.lightenJustificatif(
-        this.organisationManifestationsScientifiques
-      ),
-      organisationSeminaire: this.lightenJustificatif(
-        this.organisationSeminaire
-      ),
-    };
+      const responsabilitesScientifiques = {
+        laboratoireEquipeCed: this.lightenJustificatif(
+          this.laboratoireEquipeCed
+        ),
+        polesCompetenceReseaux: this.lightenJustificatif(
+          this.polesCompetenceReseaux
+        ),
+        cedDoctoratMaster: this.lightenJustificatif(this.cedDoctoratMaster),
+        projetsContratsRechercheFinances: this.lightenJustificatif(
+          this.projetsContratsRechercheFinances
+        ),
+        activitesExpertiseEvaluationsScientifiques: this.lightenJustificatif(
+          this.activitesExpertiseEvaluationsScientifiques
+        ),
+        organisationManifestationsScientifiques: this.lightenJustificatif(
+          this.organisationManifestationsScientifiques
+        ),
+        organisationSeminaire: this.lightenJustificatif(
+          this.organisationSeminaire
+        ),
+      };
 
-    this.candidature.activitesPedagogiques = {
-      productionPedagogique,
-      encadrementPedagogique,
-      responsabilitesPedagogiquesAdministratives,
-    };
+      this.candidature.activitesPedagogiques = {
+        productionPedagogique,
+        encadrementPedagogique,
+        responsabilitesPedagogiquesAdministratives,
+      };
 
-    this.candidature.activitesRecherche = {
-      productionScientifique,
-      encadrementScientifique,
-      responsabilitesScientifiques,
-    };
+      this.candidature.activitesRecherche = {
+        productionScientifique,
+        encadrementScientifique,
+        responsabilitesScientifiques,
+      };
+      this.candidatureService.addCandidature(this.candidature).subscribe(
+        (resp: any) => {
+          console.log(resp);
+          this.notificationService.notification$.next(
+            'Candidature envoyé avec succès.'
+          );
+          this.createForms();
+          this.candidature = <Candidature>{};
+          stepper.reset();
+        },
+        (error) => {
+          this.notificationService.notification$.next(
+            "Une erreur s'est produite."
+          );
+        }
+      );
+    } else {
+      this.validateAllFormFields(this.donneesPersonnelles);
+      this.validateAllFormFields(this.passageCadreGrade);
+    }
+  }
 
-    console.log(this.candidature);
-    this.candidatureService
-      .addCandidature(this.candidature)
-      .subscribe((candid) => {
-        console.log(candid);
-      });
+  private validateAllFormFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach((field) => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        this.validateAllFormFields(control);
+      }
+    });
+  }
+
+  private createForms() {
+    this.donneesPersonnelles = new FormGroup({
+      nom: new FormControl('', Validators.required),
+      prenom: new FormControl('', Validators.required),
+      departement: new FormControl('', Validators.required),
+      dateRecrutement: new FormControl('', Validators.required),
+      grade: new FormControl('', Validators.required),
+      telephone: new FormControl('', Validators.required),
+      fax: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
+    });
+
+    this.passageCadreGrade = new FormGroup({
+      typePassage: new FormControl('', Validators.required),
+      cadreGrade: new FormControl('', Validators.required),
+    });
   }
 
   private lightenJustificatif(

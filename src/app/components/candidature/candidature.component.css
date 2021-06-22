@@ -111,3 +111,9 @@
   font-weight: 500;
   margin-top: 50px;
 }
+
+.envoyer-button {
+  margin-top: 20px;
+  float: right;
+  width: 200px;
+}
