@@ -6,7 +6,7 @@
         fxLayout="row"
         fxLayoutAlign="center top"
       >
-        <div class="table-container">
+        <div *ngIf="!!candidats?.length" class="table-container">
           <mat-table [dataSource]="candidats" style="cursor: pointer">
             <ng-container matColumnDef="nom">
               <mat-header-cell *matHeaderCellDef>Nom</mat-header-cell>
@@ -42,6 +42,10 @@
             ></mat-row>
           </mat-table>
         </div>
+        <div *ngIf="!candidats?.length" class="not-found-container">
+          <img class="not-found" src="assets/resume.svg" alt="" />
+          <div class="not-found-text">Il n'y a pas de candidatures.</div>
+        </div>
       </div>
     </mat-tab>
 
@@ -51,8 +55,20 @@
         fxLayout="row"
         fxLayoutAlign="center top"
       >
-        <div class="table-container">
+        <div *ngIf="!!evaluateurs?.length" class="table-container">
           <mat-table [dataSource]="evaluateurs" style="cursor: pointer">
+            <ng-container matColumnDef="state">
+              <mat-header-cell *matHeaderCellDef>État</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <mat-icon *ngIf="row.blocked" mat-list-icon color="primary"
+                  >person_off</mat-icon
+                >
+                <mat-icon *ngIf="!row.blocked" mat-list-icon color="primary"
+                  >person</mat-icon
+                >
+              </mat-cell>
+            </ng-container>
+
             <ng-container matColumnDef="nom">
               <mat-header-cell *matHeaderCellDef>Nom</mat-header-cell>
               <mat-cell *matCellDef="let row">
@@ -60,7 +76,6 @@
               </mat-cell>
             </ng-container>
 
-            <!-- TODO: Temporary -->
             <ng-container matColumnDef="prenom">
               <mat-header-cell *matHeaderCellDef>Prénom</mat-header-cell>
               <mat-cell *matCellDef="let row">
@@ -77,33 +92,36 @@
                   'unblock-cell': row.blocked
                 }"
               >
-                <span
-                  style="cursor: pointer; user-select: none"
-                  (click)="toggleBlock(row.id)"
-                  >{{
-                    row.blocked ? "Débloquer Compte" : "Bloquer Compte"
-                  }}</span
-                >
+                <span (click)="toggleBlock(row.id)" class="action">
+                  {{ row.blocked ? "Activer" : "Désactiver" }}
+                </span>
               </mat-cell>
             </ng-container>
 
             <mat-header-row
-              *matHeaderRowDef="['nom', 'prenom', 'action']"
+              *matHeaderRowDef="['state', 'nom', 'prenom', 'action']"
             ></mat-header-row>
             <mat-row
-              *matRowDef="let row; columns: ['nom', 'prenom', 'action']"
+              *matRowDef="
+                let row;
+                columns: ['state', 'nom', 'prenom', 'action']
+              "
             ></mat-row>
           </mat-table>
         </div>
+        <div *ngIf="!evaluateurs?.length" class="not-found-container">
+          <img class="not-found" src="assets/group.svg" alt="" />
+          <div class="not-found-text">Il n'y a pas encore d'evaluateurs.</div>
+        </div>
       </div>
     </mat-tab>
-    <mat-tab label="Third">
+    <mat-tab label="Ajouter Evaluateur">
       <div
         class="tab-container-height"
         fxLayout="row"
-        fxLayoutAlign="center center"
+        fxLayoutAlign="center top"
       >
-        <p>Content 3</p>
+        <app-add-user></app-add-user>
       </div>
     </mat-tab>
   </mat-tab-group>

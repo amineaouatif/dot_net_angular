@@ -14,8 +14,9 @@
     </mat-card>
 
     <mat-vertical-stepper
-      [linear]="false"
+      [linear]="true"
       class="mat-elevation-z2 candidature-vertical-stepper"
+      #stepper
     >
       <mat-step [stepControl]="donneesPersonnelles">
         <ng-template matStepLabel>Données personnelles</ng-template>
@@ -301,6 +302,23 @@
         </mat-vertical-stepper>
       </mat-step>
     </mat-vertical-stepper>
-    <button (click)="submit()">submit</button>
+    <mat-card *ngIf="!!tokenCandidature" class="candidature-link-card">
+      <span>Votre identifiant de candidature est : </span>
+      <a
+        routerLink="candidature"
+        class="token-lien"
+        [queryParams]="{ token: tokenCandidature }"
+      >
+        {{ tokenCandidature }}</a
+      >
+    </mat-card>
+    <button
+      class="envoyer-button"
+      mat-raised-button
+      color="primary"
+      (click)="submit(stepper)"
+    >
+      Envoyer
+    </button>
   </div>
 </div>

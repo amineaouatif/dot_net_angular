@@ -10,7 +10,7 @@ export class EvaluatorService {
   constructor(private http: HttpClient) {}
 
   addEvaluator(userData) {
-    return this.http.post<any>(`${environment.api}/add-user`, userData);
+    return this.http.post<any>(`${environment.api}/users/add`, userData);
   }
 
   toggleEvaluatorBlock(id: number): Observable<any> {

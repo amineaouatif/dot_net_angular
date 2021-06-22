@@ -19,7 +19,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 /* Comopnents */
 import { LogInComponent } from './components/log-in/log-in.component';
-import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { CandidatureComponent } from './components/candidature/candidature.component';
 
@@ -34,9 +33,6 @@ import { SubmittedCandidatureComponent } from './components/submitted-candidatur
 @NgModule({
   declarations: [
     AppComponent,
-    LogInComponent,
-    RegisterComponent,
-    RegisterComponent,
     LogInComponent,
     HomeComponent,
     CandidatureComponent,
