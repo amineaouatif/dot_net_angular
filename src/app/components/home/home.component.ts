@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../services/home.service';
 import { SimpleCandidature } from '../../dto/simpleCandidature.dto';
 import { User } from '../../dto/user.dto';
-import { UserService } from 'src/app/services/user.service';
+import { EvaluatorService } from 'src/app/services/evaluator.service';
 
 import { MatDialog } from '@angular/material/dialog';
 
@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   candidats: SimpleCandidature[] = [];
   constructor(
     readonly homeService: HomeService,
-    readonly userService: UserService,
+    readonly evaluatorService: EvaluatorService,
     readonly dialog: MatDialog
   ) {}
 
@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
   }
 
   toggleBlock(id: number) {
-    this.userService.toggleEvaluatorBlock(id);
+    this.evaluatorService.toggleEvaluatorBlock(id);
     this.evaluateurs.map((evaluator) => {
       if (evaluator.id == id) evaluator.blocked = !evaluator.blocked;
     });
