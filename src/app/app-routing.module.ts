@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'login', component: LogInComponent },
   { path: 'add-user', component: AddUserComponent },
   {
-    path: 'evaluation',
+    path: 'evaluation/:id',
     component: EvaluationComponent,
     canActivate: [AuthGuard],
   },

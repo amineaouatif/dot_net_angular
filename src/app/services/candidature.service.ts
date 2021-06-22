@@ -26,4 +26,9 @@ export class CandidatureService {
       { params: { token: token } }
     );
   }
+  getCandidatureById(id: string): Observable<CandidatureDto> {
+    return this.http.get<CandidatureDto>(
+      `${environment.api}/candidature/` + id
+    );
+  }
 }

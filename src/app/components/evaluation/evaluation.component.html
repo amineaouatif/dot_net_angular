@@ -10,21 +10,21 @@
     <div class="evaluation-info-row">
       <div class="evaluation-attr">Nom :</div>
       <div class="evaluation-value">
-        {{ candidature.donneesPersonnelles.nom }}
+        {{ candidature?.donneesPersonnelles.nom }}
       </div>
     </div>
     <mat-divider></mat-divider>
     <div class="evaluation-info-row">
       <div class="evaluation-attr">Prenom :</div>
       <div class="evaluation-value">
-        {{ candidature.donneesPersonnelles.prenom }}
+        {{ candidature?.donneesPersonnelles.prenom }}
       </div>
     </div>
     <mat-divider></mat-divider>
     <div class="evaluation-info-row">
       <div class="evaluation-attr">Departement :</div>
       <div class="evaluation-value">
-        {{ candidature.donneesPersonnelles.departement }}
+        {{ candidature?.donneesPersonnelles.departement }}
       </div>
     </div>
     <mat-divider></mat-divider>
@@ -32,7 +32,7 @@
       <div class="evaluation-attr">Date de recrutement :</div>
       <div class="evaluation-value">
         {{
-          candidature.donneesPersonnelles.dateRecrutement | date: "shortDate"
+          candidature?.donneesPersonnelles.dateRecrutement | date: "shortDate"
         }}
       </div>
     </div>
@@ -40,28 +40,28 @@
     <div class="evaluation-info-row">
       <div class="evaluation-attr">Grade actuel :</div>
       <div class="evaluation-value">
-        {{ candidature.donneesPersonnelles.grade.name }}
+        {{ candidature?.donneesPersonnelles.grade.name }}
       </div>
     </div>
     <mat-divider></mat-divider>
     <div class="evaluation-info-row">
       <div class="evaluation-attr">Téléphone :</div>
       <div class="evaluation-value">
-        {{ candidature.donneesPersonnelles.telephone }}
+        {{ candidature?.donneesPersonnelles.telephone }}
       </div>
     </div>
     <mat-divider></mat-divider>
     <div class="evaluation-info-row">
       <div class="evaluation-attr">Fax :</div>
       <div class="evaluation-value">
-        {{ candidature.donneesPersonnelles.fax }}
+        {{ candidature?.donneesPersonnelles.fax }}
       </div>
     </div>
     <mat-divider></mat-divider>
     <div class="evaluation-info-row">
       <div class="evaluation-attr">E-mail :</div>
       <div class="evaluation-value">
-        {{ candidature.donneesPersonnelles.email }}
+        {{ candidature?.donneesPersonnelles.email }}
       </div>
     </div>
     <mat-divider></mat-divider>
@@ -70,14 +70,14 @@
     <div class="evaluation-info-row">
       <div class="evaluation-attr">Type d’avancement :</div>
       <div class="evaluation-value">
-        {{ candidature.passageCadreGrade.typePassage }}
+        {{ candidature?.passageCadreGrade.typePassage }}
       </div>
     </div>
     <mat-divider></mat-divider>
     <div class="evaluation-info-row">
       <div class="evaluation-attr">Cadre et grade :</div>
       <div class="evaluation-value">
-        {{ candidature.passageCadreGrade.cadreGrade }}
+        {{ candidature?.passageCadreGrade.cadreGrade }}
       </div>
     </div>
   </mat-card>
@@ -98,7 +98,7 @@
               [noteTotale]="2"
               [noteIncrementation]="1"
               [disbaled]="
-                candidature.activitesPedagogiques.productionPedagogique
+                candidature?.activitesPedagogiques.productionPedagogique
                   .ouvragesManuels?.length === 0
               "
             ></app-note>
@@ -107,7 +107,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesPedagogiques
+              let item of candidature?.activitesPedagogiques
                 .productionPedagogique.ouvragesManuels
             "
             matRipple
@@ -122,7 +122,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesPedagogiques.productionPedagogique
+            candidature?.activitesPedagogiques.productionPedagogique
               .ouvragesManuels?.length === 0
           "
         >
@@ -139,7 +139,7 @@
               [noteTotale]="4"
               [noteIncrementation]="1"
               [disbaled]="
-                candidature.activitesPedagogiques.productionPedagogique
+                candidature?.activitesPedagogiques.productionPedagogique
                   .polycopiesEnseignement?.length === 0
               "
             ></app-note>
@@ -148,7 +148,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesPedagogiques
+              let item of candidature?.activitesPedagogiques
                 .productionPedagogique.polycopiesEnseignement
             "
             matRipple
@@ -163,7 +163,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesPedagogiques.productionPedagogique
+            candidature?.activitesPedagogiques.productionPedagogique
               .polycopiesEnseignement?.length === 0
           "
         >
@@ -180,7 +180,7 @@
               [noteTotale]="2"
               [noteIncrementation]="1 / 2"
               [disbaled]="
-                candidature.activitesPedagogiques.productionPedagogique
+                candidature?.activitesPedagogiques.productionPedagogique
                   .supportsProcedesDidactiques?.length === 0
               "
             ></app-note>
@@ -189,7 +189,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesPedagogiques
+              let item of candidature?.activitesPedagogiques
                 .productionPedagogique.supportsProcedesDidactiques
             "
             matRipple
@@ -204,7 +204,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesPedagogiques.productionPedagogique
+            candidature?.activitesPedagogiques.productionPedagogique
               .supportsProcedesDidactiques?.length === 0
           "
         >
@@ -225,7 +225,7 @@
               [noteTotale]="3"
               [noteIncrementation]="1 / 2"
               [disbaled]="
-                candidature.activitesPedagogiques.encadrementPedagogique
+                candidature?.activitesPedagogiques.encadrementPedagogique
                   .encadrementProjetsPFE?.length === 0
               "
             ></app-note>
@@ -234,7 +234,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesPedagogiques
+              let item of candidature?.activitesPedagogiques
                 .encadrementPedagogique.encadrementProjetsPFE
             "
             matRipple
@@ -249,7 +249,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesPedagogiques.encadrementPedagogique
+            candidature?.activitesPedagogiques.encadrementPedagogique
               .encadrementProjetsPFE?.length === 0
           "
         >
@@ -268,7 +268,7 @@
               [noteTotale]="1"
               [noteIncrementation]="1 / 24"
               [disbaled]="
-                candidature.activitesPedagogiques.encadrementPedagogique
+                candidature?.activitesPedagogiques.encadrementPedagogique
                   .encadrementProjetsPFA?.length === 0
               "
             ></app-note>
@@ -277,7 +277,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesPedagogiques
+              let item of candidature?.activitesPedagogiques
                 .encadrementPedagogique.encadrementProjetsPFA
             "
             matRipple
@@ -292,7 +292,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesPedagogiques.encadrementPedagogique
+            candidature?.activitesPedagogiques.encadrementPedagogique
               .encadrementProjetsPFA?.length === 0
           "
         >
@@ -309,7 +309,7 @@
               [noteTotale]="1"
               [noteIncrementation]="1 / 2"
               [disbaled]="
-                candidature.activitesPedagogiques.encadrementPedagogique
+                candidature?.activitesPedagogiques.encadrementPedagogique
                   .memoiresFinEtudesMaster?.length === 0
               "
             ></app-note>
@@ -318,7 +318,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesPedagogiques
+              let item of candidature?.activitesPedagogiques
                 .encadrementPedagogique.memoiresFinEtudesMaster
             "
             matRipple
@@ -333,7 +333,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesPedagogiques.encadrementPedagogique
+            candidature?.activitesPedagogiques.encadrementPedagogique
               .memoiresFinEtudesMaster?.length === 0
           "
         >
@@ -350,7 +350,7 @@
               [noteTotale]="1"
               [noteIncrementation]="1 / 4"
               [disbaled]="
-                candidature.activitesPedagogiques.encadrementPedagogique
+                candidature?.activitesPedagogiques.encadrementPedagogique
                   .encadrementStages?.length === 0
               "
             ></app-note>
@@ -359,7 +359,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesPedagogiques
+              let item of candidature?.activitesPedagogiques
                 .encadrementPedagogique.encadrementStages
             "
             matRipple
@@ -374,7 +374,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesPedagogiques.encadrementPedagogique
+            candidature?.activitesPedagogiques.encadrementPedagogique
               .encadrementStages?.length === 0
           "
         >
@@ -393,7 +393,7 @@
               [noteTotale]="1"
               [noteIncrementation]="1 / 2"
               [disbaled]="
-                candidature.activitesPedagogiques.encadrementPedagogique
+                candidature?.activitesPedagogiques.encadrementPedagogique
                   .encadrementRessourcesHumaines?.length === 0
               "
             ></app-note>
@@ -402,7 +402,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesPedagogiques
+              let item of candidature?.activitesPedagogiques
                 .encadrementPedagogique.encadrementRessourcesHumaines
             "
             matRipple
@@ -417,7 +417,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesPedagogiques.encadrementPedagogique
+            candidature?.activitesPedagogiques.encadrementPedagogique
               .encadrementRessourcesHumaines?.length === 0
           "
         >
@@ -438,7 +438,7 @@
               [noteTotale]="5"
               [noteIncrementation]="1 / 2"
               [disbaled]="
-                candidature.activitesPedagogiques
+                candidature?.activitesPedagogiques
                   .responsabilitesPedagogiquesAdministratives.gestionDepartement
                   ?.length === 0
               "
@@ -448,7 +448,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesPedagogiques
+              let item of candidature?.activitesPedagogiques
                 .responsabilitesPedagogiquesAdministratives.gestionDepartement
             "
             matRipple
@@ -463,7 +463,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesPedagogiques
+            candidature?.activitesPedagogiques
               .responsabilitesPedagogiquesAdministratives.gestionDepartement
               ?.length === 0
           "
@@ -483,7 +483,7 @@
               [noteTotale]="5"
               [noteIncrementation]="1 / 4"
               [disbaled]="
-                candidature.activitesPedagogiques
+                candidature?.activitesPedagogiques
                   .responsabilitesPedagogiquesAdministratives
                   .responsableFiliereModule?.length === 0
               "
@@ -493,7 +493,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesPedagogiques
+              let item of candidature?.activitesPedagogiques
                 .responsabilitesPedagogiquesAdministratives
                 .responsableFiliereModule
             "
@@ -509,7 +509,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesPedagogiques
+            candidature?.activitesPedagogiques
               .responsabilitesPedagogiquesAdministratives
               .responsableFiliereModule?.length === 0
           "
@@ -529,7 +529,7 @@
               [noteTotale]="12"
               [noteIncrementation]="1 / 4"
               [disbaled]="
-                candidature.activitesPedagogiques
+                candidature?.activitesPedagogiques
                   .responsabilitesPedagogiquesAdministratives
                   .gestionFormationUniversitaire?.length === 0
               "
@@ -539,7 +539,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesPedagogiques
+              let item of candidature?.activitesPedagogiques
                 .responsabilitesPedagogiquesAdministratives
                 .gestionFormationUniversitaire
             "
@@ -555,7 +555,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesPedagogiques
+            candidature?.activitesPedagogiques
               .responsabilitesPedagogiquesAdministratives
               .gestionFormationUniversitaire?.length === 0
           "
@@ -573,7 +573,7 @@
               [noteTotale]="2"
               [noteIncrementation]="1 / 2"
               [disbaled]="
-                candidature.activitesPedagogiques
+                candidature?.activitesPedagogiques
                   .responsabilitesPedagogiquesAdministratives.enseignementMaster
                   ?.length === 0
               "
@@ -583,7 +583,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesPedagogiques
+              let item of candidature?.activitesPedagogiques
                 .responsabilitesPedagogiquesAdministratives.enseignementMaster
             "
             matRipple
@@ -598,7 +598,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesPedagogiques
+            candidature?.activitesPedagogiques
               .responsabilitesPedagogiquesAdministratives.enseignementMaster
               ?.length === 0
           "
@@ -616,7 +616,7 @@
               [noteTotale]="2"
               [noteIncrementation]="1 / 4"
               [disbaled]="
-                candidature.activitesPedagogiques
+                candidature?.activitesPedagogiques
                   .responsabilitesPedagogiquesAdministratives
                   .membreConseilUniversite?.length === 0
               "
@@ -626,7 +626,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesPedagogiques
+              let item of candidature?.activitesPedagogiques
                 .responsabilitesPedagogiquesAdministratives
                 .membreConseilUniversite
             "
@@ -642,7 +642,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesPedagogiques
+            candidature?.activitesPedagogiques
               .responsabilitesPedagogiquesAdministratives
               .membreConseilUniversite?.length === 0
           "
@@ -660,7 +660,7 @@
               [noteTotale]="1"
               [noteIncrementation]="1 / 4"
               [disbaled]="
-                candidature.activitesPedagogiques
+                candidature?.activitesPedagogiques
                   .responsabilitesPedagogiquesAdministratives
                   .membreCommissionParitaire?.length === 0
               "
@@ -670,7 +670,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesPedagogiques
+              let item of candidature?.activitesPedagogiques
                 .responsabilitesPedagogiquesAdministratives
                 .membreCommissionParitaire
             "
@@ -686,7 +686,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesPedagogiques
+            candidature?.activitesPedagogiques
               .responsabilitesPedagogiquesAdministratives
               .membreCommissionParitaire?.length === 0
           "
@@ -706,7 +706,7 @@
               [noteTotale]="3"
               [noteIncrementation]="1 / 4"
               [disbaled]="
-                candidature.activitesPedagogiques
+                candidature?.activitesPedagogiques
                   .responsabilitesPedagogiquesAdministratives
                   .membreConseilEtablissement?.length === 0
               "
@@ -716,7 +716,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesPedagogiques
+              let item of candidature?.activitesPedagogiques
                 .responsabilitesPedagogiquesAdministratives
                 .membreConseilEtablissement
             "
@@ -732,7 +732,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesPedagogiques
+            candidature?.activitesPedagogiques
               .responsabilitesPedagogiquesAdministratives
               .membreConseilEtablissement?.length === 0
           "
@@ -752,7 +752,7 @@
               [noteTotale]="3"
               [noteIncrementation]="1"
               [disbaled]="
-                candidature.activitesPedagogiques
+                candidature?.activitesPedagogiques
                   .responsabilitesPedagogiquesAdministratives
                   .membreCommissionScientifique?.length === 0
               "
@@ -762,7 +762,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesPedagogiques
+              let item of candidature?.activitesPedagogiques
                 .responsabilitesPedagogiquesAdministratives
                 .membreCommissionScientifique
             "
@@ -778,7 +778,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesPedagogiques
+            candidature?.activitesPedagogiques
               .responsabilitesPedagogiquesAdministratives
               .membreCommissionScientifique?.length === 0
           "
@@ -799,7 +799,7 @@
               [noteTotale]="2"
               [noteIncrementation]="1 / 4"
               [disbaled]="
-                candidature.activitesPedagogiques
+                candidature?.activitesPedagogiques
                   .responsabilitesPedagogiquesAdministratives
                   .membreCommissionReformeExpertisePedagogique?.length === 0
               "
@@ -809,7 +809,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesPedagogiques
+              let item of candidature?.activitesPedagogiques
                 .responsabilitesPedagogiquesAdministratives
                 .membreCommissionReformeExpertisePedagogique
             "
@@ -825,7 +825,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesPedagogiques
+            candidature?.activitesPedagogiques
               .responsabilitesPedagogiquesAdministratives
               .membreCommissionReformeExpertisePedagogique?.length === 0
           "
@@ -853,7 +853,7 @@
               [noteTotale]="11"
               [noteIncrementation]="1"
               [disbaled]="
-                candidature.activitesRecherche.productionScientifique
+                candidature?.activitesRecherche.productionScientifique
                   .articlesScientifiquesCategorie1?.length === 0
               "
             ></app-note>
@@ -862,7 +862,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesRecherche.productionScientifique
+              let item of candidature?.activitesRecherche.productionScientifique
                 .articlesScientifiquesCategorie1
             "
             matRipple
@@ -877,7 +877,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesRecherche.productionScientifique
+            candidature?.activitesRecherche.productionScientifique
               .articlesScientifiquesCategorie1?.length === 0
           "
         >
@@ -896,7 +896,7 @@
               [noteTotale]="7"
               [noteIncrementation]="3 / 4"
               [disbaled]="
-                candidature.activitesRecherche.productionScientifique
+                candidature?.activitesRecherche.productionScientifique
                   .articlesScientifiquesCategorie2?.length === 0
               "
             ></app-note>
@@ -905,7 +905,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesRecherche.productionScientifique
+              let item of candidature?.activitesRecherche.productionScientifique
                 .articlesScientifiquesCategorie2
             "
             matRipple
@@ -920,7 +920,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesRecherche.productionScientifique
+            candidature?.activitesRecherche.productionScientifique
               .articlesScientifiquesCategorie2?.length === 0
           "
         >
@@ -939,7 +939,7 @@
               [noteTotale]="3"
               [noteIncrementation]="1 / 10"
               [disbaled]="
-                candidature.activitesRecherche.productionScientifique
+                candidature?.activitesRecherche.productionScientifique
                   .ouvragesRechercheScientifiques?.length === 0
               "
             ></app-note>
@@ -948,7 +948,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesRecherche.productionScientifique
+              let item of candidature?.activitesRecherche.productionScientifique
                 .ouvragesRechercheScientifiques
             "
             matRipple
@@ -963,7 +963,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesRecherche.productionScientifique
+            candidature?.activitesRecherche.productionScientifique
               .ouvragesRechercheScientifiques?.length === 0
           "
         >
@@ -982,7 +982,7 @@
               [noteTotale]="4"
               [noteIncrementation]="1 / 4"
               [disbaled]="
-                candidature.activitesRecherche.productionScientifique
+                candidature?.activitesRecherche.productionScientifique
                   .publicationsActesCongres?.length === 0
               "
             ></app-note>
@@ -991,7 +991,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesRecherche.productionScientifique
+              let item of candidature?.activitesRecherche.productionScientifique
                 .publicationsActesCongres
             "
             matRipple
@@ -1006,7 +1006,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesRecherche.productionScientifique
+            candidature?.activitesRecherche.productionScientifique
               .publicationsActesCongres?.length === 0
           "
         >
@@ -1025,7 +1025,7 @@
               [noteTotale]="3"
               [noteIncrementation]="1 / 2"
               [disbaled]="
-                candidature.activitesRecherche.productionScientifique
+                candidature?.activitesRecherche.productionScientifique
                   .depotBrevetsRealisationPrototypes?.length === 0
               "
             ></app-note>
@@ -1034,7 +1034,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesRecherche.productionScientifique
+              let item of candidature?.activitesRecherche.productionScientifique
                 .depotBrevetsRealisationPrototypes
             "
             matRipple
@@ -1049,7 +1049,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesRecherche.productionScientifique
+            candidature?.activitesRecherche.productionScientifique
               .depotBrevetsRealisationPrototypes?.length === 0
           "
         >
@@ -1070,7 +1070,7 @@
               [noteTotale]="5"
               [noteIncrementation]="1 / 10"
               [disbaled]="
-                candidature.activitesRecherche.encadrementScientifique
+                candidature?.activitesRecherche.encadrementScientifique
                   .encadrementCoencadrementThesesDoctorat?.length === 0
               "
             ></app-note>
@@ -1079,8 +1079,8 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesRecherche.encadrementScientifique
-                .encadrementCoencadrementThesesDoctorat
+              let item of candidature?.activitesRecherche
+                .encadrementScientifique.encadrementCoencadrementThesesDoctorat
             "
             matRipple
             class="mat-list-action"
@@ -1094,7 +1094,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesRecherche.encadrementScientifique
+            candidature?.activitesRecherche.encadrementScientifique
               .encadrementCoencadrementThesesDoctorat?.length === 0
           "
         >
@@ -1113,7 +1113,7 @@
               [noteTotale]="2"
               [noteIncrementation]="1 / 10"
               [disbaled]="
-                candidature.activitesRecherche.encadrementScientifique
+                candidature?.activitesRecherche.encadrementScientifique
                   .encadrementCoencadrementTravauxRechercheMaster?.length === 0
               "
             ></app-note>
@@ -1122,7 +1122,8 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesRecherche.encadrementScientifique
+              let item of candidature?.activitesRecherche
+                .encadrementScientifique
                 .encadrementCoencadrementTravauxRechercheMaster
             "
             matRipple
@@ -1137,7 +1138,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesRecherche.encadrementScientifique
+            candidature?.activitesRecherche.encadrementScientifique
               .encadrementCoencadrementTravauxRechercheMaster?.length === 0
           "
         >
@@ -1156,7 +1157,7 @@
               [noteTotale]="2"
               [noteIncrementation]="1 / 4"
               [disbaled]="
-                candidature.activitesRecherche.encadrementScientifique
+                candidature?.activitesRecherche.encadrementScientifique
                   .rapporteurMembreJuryNote?.length === 0
               "
             ></app-note>
@@ -1165,8 +1166,8 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesRecherche.encadrementScientifique
-                .rapporteurMembreJuryNote
+              let item of candidature?.activitesRecherche
+                .encadrementScientifique.rapporteurMembreJuryNote
             "
             matRipple
             class="mat-list-action"
@@ -1180,7 +1181,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesRecherche.encadrementScientifique
+            candidature?.activitesRecherche.encadrementScientifique
               .rapporteurMembreJuryNote?.length === 0
           "
         >
@@ -1201,7 +1202,7 @@
               [noteTotale]="2"
               [noteIncrementation]="1 / 4"
               [disbaled]="
-                candidature.activitesRecherche.responsabilitesScientifiques
+                candidature?.activitesRecherche.responsabilitesScientifiques
                   .laboratoireEquipeCed?.length === 0
               "
             ></app-note>
@@ -1210,7 +1211,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesRecherche
+              let item of candidature?.activitesRecherche
                 .responsabilitesScientifiques.laboratoireEquipeCed
             "
             matRipple
@@ -1225,7 +1226,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesRecherche.responsabilitesScientifiques
+            candidature?.activitesRecherche.responsabilitesScientifiques
               .laboratoireEquipeCed?.length === 0
           "
         >
@@ -1244,7 +1245,7 @@
               [noteTotale]="1"
               [noteIncrementation]="1 / 4"
               [disbaled]="
-                candidature.activitesRecherche.responsabilitesScientifiques
+                candidature?.activitesRecherche.responsabilitesScientifiques
                   .polesCompetenceReseaux?.length === 0
               "
             ></app-note>
@@ -1253,7 +1254,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesRecherche
+              let item of candidature?.activitesRecherche
                 .responsabilitesScientifiques.polesCompetenceReseaux
             "
             matRipple
@@ -1268,7 +1269,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesRecherche.responsabilitesScientifiques
+            candidature?.activitesRecherche.responsabilitesScientifiques
               .polesCompetenceReseaux?.length === 0
           "
         >
@@ -1285,7 +1286,7 @@
               [noteTotale]="2"
               [noteIncrementation]="1 / 4"
               [disbaled]="
-                candidature.activitesRecherche.responsabilitesScientifiques
+                candidature?.activitesRecherche.responsabilitesScientifiques
                   .cedDoctoratMaster?.length === 0
               "
             ></app-note>
@@ -1294,7 +1295,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesRecherche
+              let item of candidature?.activitesRecherche
                 .responsabilitesScientifiques.cedDoctoratMaster
             "
             matRipple
@@ -1309,7 +1310,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesRecherche.responsabilitesScientifiques
+            candidature?.activitesRecherche.responsabilitesScientifiques
               .cedDoctoratMaster?.length === 0
           "
         >
@@ -1328,7 +1329,7 @@
               [noteTotale]="2"
               [noteIncrementation]="1 / 4"
               [disbaled]="
-                candidature.activitesRecherche.responsabilitesScientifiques
+                candidature?.activitesRecherche.responsabilitesScientifiques
                   .projetsContratsRechercheFinances?.length === 0
               "
             ></app-note>
@@ -1337,7 +1338,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesRecherche
+              let item of candidature?.activitesRecherche
                 .responsabilitesScientifiques.projetsContratsRechercheFinances
             "
             matRipple
@@ -1352,7 +1353,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesRecherche.responsabilitesScientifiques
+            candidature?.activitesRecherche.responsabilitesScientifiques
               .projetsContratsRechercheFinances?.length === 0
           "
         >
@@ -1372,7 +1373,7 @@
               [noteTotale]="2"
               [noteIncrementation]="1 / 2"
               [disbaled]="
-                candidature.activitesRecherche.responsabilitesScientifiques
+                candidature?.activitesRecherche.responsabilitesScientifiques
                   .activitesExpertiseEvaluationsScientifiques?.length === 0
               "
             ></app-note>
@@ -1381,7 +1382,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesRecherche
+              let item of candidature?.activitesRecherche
                 .responsabilitesScientifiques
                 .activitesExpertiseEvaluationsScientifiques
             "
@@ -1397,7 +1398,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesRecherche.responsabilitesScientifiques
+            candidature?.activitesRecherche.responsabilitesScientifiques
               .activitesExpertiseEvaluationsScientifiques?.length === 0
           "
         >
@@ -1417,7 +1418,7 @@
               [noteTotale]="3"
               [noteIncrementation]="1 / 2"
               [disbaled]="
-                candidature.activitesRecherche.responsabilitesScientifiques
+                candidature?.activitesRecherche.responsabilitesScientifiques
                   .organisationManifestationsScientifiques?.length === 0
               "
             ></app-note>
@@ -1426,7 +1427,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesRecherche
+              let item of candidature?.activitesRecherche
                 .responsabilitesScientifiques
                 .organisationManifestationsScientifiques
             "
@@ -1442,7 +1443,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesRecherche.responsabilitesScientifiques
+            candidature?.activitesRecherche.responsabilitesScientifiques
               .organisationManifestationsScientifiques?.length === 0
           "
         >
@@ -1459,7 +1460,7 @@
               [noteTotale]="1"
               [noteIncrementation]="1 / 4"
               [disbaled]="
-                candidature.activitesRecherche.responsabilitesScientifiques
+                candidature?.activitesRecherche.responsabilitesScientifiques
                   .organisationSeminaire?.length === 0
               "
             ></app-note>
@@ -1468,7 +1469,7 @@
         <mat-list role="list">
           <mat-list-item
             *ngFor="
-              let item of candidature.activitesRecherche
+              let item of candidature?.activitesRecherche
                 .responsabilitesScientifiques.organisationSeminaire
             "
             matRipple
@@ -1483,7 +1484,7 @@
         </mat-list>
         <div
           *ngIf="
-            candidature.activitesRecherche.responsabilitesScientifiques
+            candidature?.activitesRecherche.responsabilitesScientifiques
               .organisationSeminaire?.length === 0
           "
         >
