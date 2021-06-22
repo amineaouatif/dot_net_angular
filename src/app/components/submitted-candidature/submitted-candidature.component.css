@@ -12,6 +12,14 @@
   text-align: center;
 }
 
+.evaluation-first-description {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 100;
+  max-width: 1000px;
+  margin: 60px auto;
+}
+
 .evaluation-card {
   padding: 25px;
   margin-top: 40px;

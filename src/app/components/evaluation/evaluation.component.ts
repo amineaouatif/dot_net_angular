@@ -4,6 +4,7 @@ import { CandidatureDto } from 'src/app/dto/candidature.dto';
 import { CandidatureService } from 'src/app/services/candidature.service';
 import { environment } from '../../../environments/environment';
 import { Candidature } from '../../interfaces/candidature';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-evaluation',
@@ -58,21 +59,26 @@ export class EvaluationComponent implements OnInit {
   constructor(
     readonly candidatureService: CandidatureService,
     readonly route: ActivatedRoute,
-    readonly router: Router
+    readonly router: Router,
+    private loadingService: LoadingService
   ) {
     var token = '';
     this.route.paramMap.subscribe((paramMap) => {
       token = paramMap.get('id');
     });
-    this.candidatureService.getCandidatureById(token).subscribe(
-      (candidature) => {
-        this.candidatureDto = candidature;
-        this.candidature = JSON.parse(candidature.jsonContent);
-      },
-      (error) => {
-        this.router.navigate(['home']);
-      }
-    );
+    this.loadingService.loading$.next(true);
+    this.candidatureService
+      .getCandidatureById(token)
+      .subscribe(
+        (candidature) => {
+          this.candidatureDto = candidature;
+          this.candidature = JSON.parse(candidature.jsonContent);
+        },
+        (error) => {
+          this.router.navigate(['home']);
+        }
+      )
+      .add(() => this.loadingService.loading$.next(false));
   }
 
   download(fileName: string) {

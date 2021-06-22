@@ -3,6 +3,16 @@
     <h1 class="evaluation-first-title">
       Dossier : <span class="token-text">{{ token }}</span>
     </h1>
+    <div class="evaluation-first-description">
+      <div>Votre dossier n'est pas encore traité</div>
+      <div *ngIf="candidatureDto?.validated !== 0">
+        <div>
+          Passage :
+          {{ candidatureDto?.validated === 1 ? "Accepeté" : "Refusé" }}
+        </div>
+        <div>Note : {{ candidatureDto?.note }}</div>
+      </div>
+    </div>
   </mat-card>
 
   <mat-card class="evaluation-card mat-elevation-z2">

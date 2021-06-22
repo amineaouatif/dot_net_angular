@@ -1496,20 +1496,22 @@
       </div>
     </div>
   </mat-card>
-  <button
-    class="envoyer-button"
-    mat-raised-button
-    color="primary"
-    (click)="submit(2)"
-  >
-    Accepter
-  </button>
-  <button
-    class="envoyer-button"
-    mat-raised-button
-    color="primary"
-    (click)="submit(1)"
-  >
-    Refuser
-  </button>
+  <div class="eval-action">
+    <button
+      class="envoyer-button"
+      mat-raised-button
+      color="accent"
+      (click)="submit(1)"
+    >
+      Refuser
+    </button>
+    <button
+      class="envoyer-button"
+      mat-raised-button
+      color="primary"
+      (click)="submit(2)"
+    >
+      Accepter
+    </button>
+  </div>
 </div>
