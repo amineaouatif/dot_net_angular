@@ -1,39 +1,53 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NotificationService } from '../../services/notification.service';
+import { EvaluatorService } from '../../services/evaluator.service';
 
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
-  styleUrls: ['./add-user.component.css']
+  styleUrls: ['./add-user.component.css'],
 })
 export class AddUserComponent implements OnInit {
-  credentials: FormGroup;
-  
+  credentials: FormGroup = this.fb.group({
+    username: ['', [Validators.required]],
+    fname: ['', [Validators.required]],
+    lname: ['', [Validators.required]],
+  });
+  generatedPassword: string;
+  usernameRemote: string;
 
-  get username() {
-    return this.credentials.get('username');
-  }
-  get lastname() {
-    return this.credentials.get('lastname');
-  }
-  get firstname() {
-    return this.credentials.get('firstname');
-  }
   constructor(
     private fb: FormBuilder,
-  ) {
-    
-   }
+    private evaluatorService: EvaluatorService,
+    private notificationService: NotificationService
+  ) {}
 
-  ngOnInit(): void {
-    this.credentials = this.fb.group({ 
-      username: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
-      firstname: ['', [Validators.required]],
-    });
-  }
-  onSubmit(){
-    console.log(this.credentials.value);
-  }
+  ngOnInit(): void {}
 
+  onSubmit() {
+    if (this.credentials.valid) {
+      this.evaluatorService
+        .addEvaluator({
+          Username: this.credentials.value.username,
+          FirstName: this.credentials.value.fname,
+          LastName: this.credentials.value.lname,
+        })
+        .subscribe(
+          (resp: any) => {
+            this.generatedPassword = resp.password;
+            this.usernameRemote = resp.username;
+          },
+          (error: any) => {
+            this.notificationService.notification$.next(
+              "La creation de l'evaluateur a echoué"
+            );
+          }
+        );
+    } else {
+      this.notificationService.notification$.next(
+        'Les données ne sont pas valides.'
+      );
+    }
+  }
 }

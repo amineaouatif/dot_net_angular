@@ -1,26 +1,49 @@
-<div class="add-user-wrapper" fxLayout="row" fxLayoutAlign="center center">
-    <mat-card class="user-box">
-      <mat-card-header>
-        <mat-card-title>Ajouter un évaluateur</mat-card-title>
-      </mat-card-header>
-      <form [formGroup]="credentials" (ngSubmit)="onSubmit()">
+<div class="add-user-wrapper" fxLayout="column" fxLayoutAlign="center center">
+  <mat-card *ngIf="!!generatedPassword" class="password-card">
+    <div class="cred-text">
+      Nom d'utilisateur :
+      <span>{{ usernameRemote }}</span>
+    </div>
+    <div class="cred-text">
+      Le mot de passe généré est :
+      <span class="password">{{ generatedPassword }}</span>
+    </div>
+  </mat-card>
+  <mat-card class="user-box">
+    <mat-card-header>
+      <div class="card-title">Ajouter un évaluateur</div>
+    </mat-card-header>
+    <form [formGroup]="credentials" (ngSubmit)="onSubmit()">
       <div class="add-user-form">
         <mat-card-content>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Username" formControlName="username"/>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nom d'utilisateur</mat-label>
+            <input
+              matInput
+              placeholder="Nom d'utilisateur"
+              formControlName="username"
+            />
           </mat-form-field>
-          <mat-form-field class="full-width" >
-            <input matInput placeholder="Lastname" formControlName="lastname"/>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nom</mat-label>
+            <input matInput placeholder="Nom" formControlName="lname" />
           </mat-form-field>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Firstname"formControlName="firstname" />
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Prénom</mat-label>
+            <input matInput placeholder="Prénom" formControlName="fname" />
           </mat-form-field>
         </mat-card-content>
-        <button mat-stroked-button color="accent" class="btn-block" [disabled]='!credentials.valid'>
-          Ajouter
+        <button
+          mat-stroked-button
+          color="accent"
+          class="btn-block"
+          [disabled]="!credentials.valid"
+        >
+          Créer
         </button>
       </div>
-      </form>
-    </mat-card>
-  </div>
-  
+    </form>
+  </mat-card>
+</div>
