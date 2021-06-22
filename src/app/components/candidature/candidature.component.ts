@@ -81,6 +81,8 @@ export class CandidatureComponent implements OnInit {
   organisationManifestationsScientifiques: Array<Justificatif> = [];
   organisationSeminaire: Array<Justificatif> = [];
 
+  tokenCandidature: string;
+
   constructor(
     readonly candidatureService: CandidatureService,
     private notificationService: NotificationService
@@ -219,6 +221,7 @@ export class CandidatureComponent implements OnInit {
           this.createForms();
           this.candidature = <Candidature>{};
           stepper.reset();
+          this.tokenCandidature = resp.refrenceToken;
         },
         (error) => {
           this.notificationService.notification$.next(

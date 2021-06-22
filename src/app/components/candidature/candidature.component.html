@@ -302,6 +302,16 @@
         </mat-vertical-stepper>
       </mat-step>
     </mat-vertical-stepper>
+    <mat-card *ngIf="!!tokenCandidature" class="candidature-link-card">
+      <span>Votre identifiant de candidature est : </span>
+      <a
+        routerLink="candidature"
+        class="token-lien"
+        [queryParams]="{ token: tokenCandidature }"
+      >
+        {{ tokenCandidature }}</a
+      >
+    </mat-card>
     <button
       class="envoyer-button"
       mat-raised-button
