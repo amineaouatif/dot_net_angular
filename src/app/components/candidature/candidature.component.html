@@ -305,17 +305,18 @@
     <mat-card *ngIf="!!tokenCandidature" class="candidature-link-card">
       <span>Votre identifiant de candidature est : </span>
       <a
-        routerLink="candidature"
+        routerLink="/candidature/submitted"
         class="token-lien"
         [queryParams]="{ token: tokenCandidature }"
       >
-        {{ tokenCandidature }}</a
-      >
+        {{ tokenCandidature }}
+      </a>
     </mat-card>
     <button
       class="envoyer-button"
       mat-raised-button
       color="primary"
+      [disabled]="!donneesPersonnelles.valid || !passageCadreGrade.valid"
       (click)="submit(stepper)"
     >
       Envoyer

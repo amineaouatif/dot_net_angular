@@ -5,6 +5,7 @@
         class="tab-container-height"
         fxLayout="row"
         fxLayoutAlign="center top"
+        *ngIf="!loading"
       >
         <div *ngIf="!!candidats?.length" class="table-container">
           <mat-table [dataSource]="candidats" style="cursor: pointer">

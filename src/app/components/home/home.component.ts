@@ -15,6 +15,8 @@ import { LoadingService } from '../../services/loading.service';
 export class HomeComponent implements OnInit {
   evaluateurs: User[] = [];
   candidats: CandidatureDto[] = [];
+  loading = false;
+
   constructor(
     readonly homeService: HomeService,
     readonly evaluatorService: EvaluatorService,
@@ -23,20 +25,26 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadingService.loading$.next(true);
+    this.loading = true;
     this.homeService
       .getEvaluators()
       .subscribe((evals) => {
         this.evaluateurs = evals;
         console.log(this.evaluateurs);
       })
-      .add(() => this.loadingService.loading$.next(false));
+      .add(() => {
+        this.loadingService.loading$.next(false);
+      });
 
     this.homeService
       .getAllCandidatures()
       .subscribe((candidatures) => {
         this.candidats = candidatures;
       })
-      .add(() => this.loadingService.loading$.next(false));
+      .add(() => {
+        this.loadingService.loading$.next(false);
+        this.loading = false;
+      });
   }
 
   toggleBlock(id: number) {
