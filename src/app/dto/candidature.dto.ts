@@ -7,4 +7,5 @@ export interface CandidatureDto {
   candidateFirstName: string;
   refrenceToken: string;
   createdDate: string;
+  validated: number;
 }

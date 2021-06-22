@@ -69,3 +69,12 @@
 .token-text {
   color: #3f51b5;
 }
+
+.eval-action {
+  float: right;
+  padding: 25px 0;
+}
+.eval-action button {
+  margin-left: 15px;
+  width: 200px;
+}
