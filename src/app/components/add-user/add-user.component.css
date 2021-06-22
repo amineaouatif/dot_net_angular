@@ -1,0 +1,50 @@
+.add-user-wrapper{
+    height : 90%;
+    width : 100%;
+}
+.add-user-form {
+    min-width: 80%;
+    max-width: 80px;
+    width: 80%;
+    margin: 0 auto;
+    
+  }
+  .user-box{
+      width : 90%;
+      height:75%;
+  }
+  .add-user-wrapper .full-width,
+  .add-user-wrapper .btn-block {
+    width: 100%;
+  }
+  
+  .add-user-wrapper mat-card-header {
+    text-align: center;
+    width: 100%;
+    display: block;
+    font-weight: 700;
+  }
+  
+  .add-user-wrapper mat-card-header mat-card-title {
+    font-weight: 500;
+   font-size: 1.8rem;
+    font-family: helvetica;
+    margin: 2;
+    color:black;
+  }
+  
+  .add-user-wrapper .mat-card {
+    padding: 40px 70px 50px;
+  }
+  
+  .add-user-wrapper .mat-stroked-button {
+    border: 1px solid currentColor;
+    line-height: 45px;
+    background: #fff7fa;
+  }
+ .add-user-btn-radio{
+     margin-right:2.5rem;
+     margin-top:1rem;
+     margin-bottom: 1rem;
+ } 
+ 

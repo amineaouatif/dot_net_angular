@@ -26,7 +26,7 @@ import { CandidatureComponent } from './components/candidature/candidature.compo
 /* Interceptors */
 import { AuthorizationInterceptor } from './interceptors/authorization.interceptor';
 import { JustificatifComponent } from './components/justificatif/justificatif.component';
-
+import { AddUserComponent } from './components/add-user/add-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +37,7 @@ import { JustificatifComponent } from './components/justificatif/justificatif.co
     HomeComponent,
     CandidatureComponent,
     JustificatifComponent,
+    AddUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +55,7 @@ import { JustificatifComponent } from './components/justificatif/justificatif.co
       useClass: AuthorizationInterceptor,
       multi: true,
     },
+  
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

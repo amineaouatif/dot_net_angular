@@ -1,0 +1,38 @@
+<div class="add-user-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="user-box">
+      <mat-card-header>
+        <mat-card-title>Ajouter un évaluateur/candidat</mat-card-title>
+      </mat-card-header>
+  
+      <div class="add-user-form">
+        <mat-card-content>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Username" />
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Lastname" />
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Firstname" />
+          </mat-form-field>
+  
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Email" />
+        </mat-form-field>
+          
+          
+            <mat-radio-group  label="Select an option">
+                <mat-radio-button class="add-user-btn-radio" value="1">Candidat</mat-radio-button>
+                <mat-radio-button class="add-user-btn-radio"value="2">Evaluateur</mat-radio-button>
+              </mat-radio-group>
+          
+          
+        </mat-card-content>
+  
+        <button mat-stroked-button color="accent" class="btn-block">
+          Ajouter
+        </button>
+      </div>
+    </mat-card>
+  </div>
+  
