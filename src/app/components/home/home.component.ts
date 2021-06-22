@@ -21,9 +21,13 @@ export class HomeComponent implements OnInit {
     readonly homeService: HomeService,
     readonly evaluatorService: EvaluatorService,
     private loadingService: LoadingService
-  ) {}
+  ) {
+    this.getData();
+  }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  getData() {
     this.loadingService.loading$.next(true);
     this.loading = true;
     this.homeService
