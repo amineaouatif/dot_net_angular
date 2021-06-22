@@ -14,9 +14,14 @@ export class HomeService {
     return this.http.get<User[]>(`${environment.api}/users/evaluators`);
   }
 
-  getAllCandidatures(): Observable<CandidatureDto[]> {
+  getUntreatedCandidatures(): Observable<CandidatureDto[]> {
     return this.http.get<CandidatureDto[]>(
-      `${environment.api}/candidature/all`
+      `${environment.api}/candidature/untreated`
+    );
+  }
+  getTreatedCandidatures(): Observable<CandidatureDto[]> {
+    return this.http.get<CandidatureDto[]>(
+      `${environment.api}/candidature/treated`
     );
   }
 }

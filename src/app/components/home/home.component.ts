@@ -14,7 +14,8 @@ import { LoadingService } from '../../services/loading.service';
 })
 export class HomeComponent implements OnInit {
   evaluateurs: User[] = [];
-  candidats: CandidatureDto[] = [];
+  untreatedCandidatures: CandidatureDto[] = [];
+  treatedCandidatures: CandidatureDto[] = [];
   loading = false;
 
   constructor(
@@ -41,9 +42,19 @@ export class HomeComponent implements OnInit {
       });
 
     this.homeService
-      .getAllCandidatures()
+      .getUntreatedCandidatures()
       .subscribe((candidatures) => {
-        this.candidats = candidatures;
+        this.untreatedCandidatures = candidatures;
+      })
+      .add(() => {
+        this.loadingService.loading$.next(false);
+        this.loading = false;
+      });
+
+    this.homeService
+      .getTreatedCandidatures()
+      .subscribe((candidatures) => {
+        this.treatedCandidatures = candidatures;
       })
       .add(() => {
         this.loadingService.loading$.next(false);

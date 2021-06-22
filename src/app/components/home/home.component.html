@@ -7,8 +7,11 @@
         fxLayoutAlign="center top"
         *ngIf="!loading"
       >
-        <div *ngIf="!!candidats?.length" class="table-container">
-          <mat-table [dataSource]="candidats" style="cursor: pointer">
+        <div *ngIf="!!untreatedCandidatures?.length" class="table-container">
+          <mat-table
+            [dataSource]="untreatedCandidatures"
+            style="cursor: pointer"
+          >
             <ng-container matColumnDef="nom">
               <mat-header-cell *matHeaderCellDef>Nom</mat-header-cell>
               <mat-cell *matCellDef="let row">
@@ -43,7 +46,7 @@
             ></mat-row>
           </mat-table>
         </div>
-        <div *ngIf="!candidats?.length" class="not-found-container">
+        <div *ngIf="!untreatedCandidatures?.length" class="not-found-container">
           <img class="not-found" src="assets/resume.svg" alt="" />
           <div class="not-found-text">Il n'y a pas de candidatures.</div>
         </div>
