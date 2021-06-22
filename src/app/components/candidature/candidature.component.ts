@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Candidature, JustificatifLight } from '../../interfaces/candidature';
-
+import { CandidatureService } from '../../services/candidature.service';
 interface Justificatif {
   id: string;
   remoteFileName: string;
@@ -89,7 +89,7 @@ export class CandidatureComponent implements OnInit {
   organisationManifestationsScientifiques: Array<Justificatif> = [];
   organisationSeminaire: Array<Justificatif> = [];
 
-  constructor() {}
+  constructor(readonly candidatureService: CandidatureService) {}
 
   ngOnInit(): void {}
 
@@ -173,7 +173,9 @@ export class CandidatureComponent implements OnInit {
       encadrementCoencadrementTravauxRechercheMaster: this.lightenJustificatif(
         this.encadrementCoencadrementTravauxRechercheMaster
       ),
-      rapporteurMembreJuryNote: this.lightenJustificatif(this.rapporteurMembreJuryNote),
+      rapporteurMembreJuryNote: this.lightenJustificatif(
+        this.rapporteurMembreJuryNote
+      ),
     };
 
     const responsabilitesScientifiques = {
@@ -209,7 +211,11 @@ export class CandidatureComponent implements OnInit {
     };
 
     console.log(this.candidature);
-    console.log(JSON.stringify(this.candidature));
+    this.candidatureService
+      .addCandidature(this.candidature)
+      .subscribe((candid) => {
+        console.log(candid);
+      });
   }
 
   private lightenJustificatif(

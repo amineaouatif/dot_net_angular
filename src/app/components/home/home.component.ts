@@ -2,11 +2,9 @@ import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 
 import { HomeService } from '../../services/home.service';
-import { SimpleCandidature } from '../../dto/simpleCandidature.dto';
+import { CandidatureDto } from '../../dto/candidature.dto';
 import { User } from '../../dto/user.dto';
 import { EvaluatorService } from 'src/app/services/evaluator.service';
-
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-home',
@@ -15,11 +13,10 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class HomeComponent implements OnInit {
   evaluateurs: User[] = [];
-  candidats: SimpleCandidature[] = [];
+  candidats: CandidatureDto[] = [];
   constructor(
     readonly homeService: HomeService,
-    readonly evaluatorService: EvaluatorService,
-    readonly dialog: MatDialog
+    readonly evaluatorService: EvaluatorService
   ) {}
 
   ngOnInit(): void {
@@ -33,9 +30,10 @@ export class HomeComponent implements OnInit {
   }
 
   toggleBlock(id: number) {
-    this.evaluatorService.toggleEvaluatorBlock(id);
-    this.evaluateurs.map((evaluator) => {
-      if (evaluator.id == id) evaluator.blocked = !evaluator.blocked;
+    this.evaluatorService.toggleEvaluatorBlock(id).subscribe(() => {
+      this.evaluateurs.map((evaluator) => {
+        if (evaluator.id == id) evaluator.blocked = !evaluator.blocked;
+      });
     });
   }
 }
