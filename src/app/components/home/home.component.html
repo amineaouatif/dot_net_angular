@@ -12,15 +12,19 @@
               <mat-header-cell *matHeaderCellDef>Nom</mat-header-cell>
               <mat-cell *matCellDef="let row">
                 {{ row.candidateLastName }} {{ row.candidateFirstName }}
+                <a
+                  [routerLink]="'/evaluation/' + row.id"
+                  class="mat-row-link"
+                ></a>
               </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="departement">
+            <ng-container matColumnDef="dateDeport">
               <mat-header-cell *matHeaderCellDef>Date de dépôt</mat-header-cell>
               <mat-cell *matCellDef="let row"> {{ row.createdDate }} </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="grade">
+            <ng-container matColumnDef="refrenceToken">
               <mat-header-cell *matHeaderCellDef>Référence</mat-header-cell>
               <mat-cell *matCellDef="let row">
                 {{ row.refrenceToken }}
@@ -28,10 +32,13 @@
             </ng-container>
 
             <mat-header-row
-              *matHeaderRowDef="['nom', 'departement', 'grade']"
+              *matHeaderRowDef="['nom', 'dateDeport', 'refrenceToken']"
             ></mat-header-row>
             <mat-row
-              *matRowDef="let row; columns: ['nom', 'departement', 'grade']"
+              *matRowDef="
+                let row;
+                columns: ['nom', 'dateDeport', 'refrenceToken']
+              "
             ></mat-row>
           </mat-table>
         </div>
