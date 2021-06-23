@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   untreatedCandidatures: CandidatureDto[] = [];
   treatedCandidatures: CandidatureDto[] = [];
   loading = false;
-  userRrole: string;
+  userRole: string;
 
   constructor(
     readonly homeService: HomeService,
@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
     readonly authService: AuthService
   ) {
     this.authService.userRole$.subscribe((role) => {
-      this.userRrole = role;
+      this.userRole = role;
       this.getData();
     });
   }
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
   getData() {
     this.loadingService.loading$.next(true);
     this.loading = true;
-    if (this.userRrole == 'Admin')
+    if (this.userRole == 'Admin')
       this.homeService
         .getEvaluators()
         .subscribe((evals) => {
