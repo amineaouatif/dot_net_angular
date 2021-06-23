@@ -1,4 +1,5 @@
 .card-title {
   font-weight: 100;
   font-size: xx-large;
+  user-select: none;
 }

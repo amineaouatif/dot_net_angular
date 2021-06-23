@@ -37,7 +37,7 @@ export class LogInComponent implements OnInit {
               error.error.message === 'Username or password is incorrect'
             )
               this.notificationService.notification$.next(
-                "Nom d'utilisateur ou mot de passe incorrect"
+                "Nom d'utilisateur ou mot de passe incorrect, ou compte bloqué"
               );
             else
               this.notificationService.notification$.next(
