@@ -1,2 +1,2 @@
 Install packages `npm i`  
-Run server `npm run`
+To run the desktop app `npm run start:electron`
