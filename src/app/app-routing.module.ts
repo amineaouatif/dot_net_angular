@@ -10,12 +10,25 @@ import { AuthGuard } from './guards/auth.guard';
 import { NoAuthGuard } from './guards/no-auth.guard';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  {
+    path: '',
+    pathMatch: 'full',
+    canActivate: [NoAuthGuard],
+    redirectTo: 'candidature',
+  },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'candidature', component: CandidatureComponent },
-  { path: 'candidature/submitted', component: SubmittedCandidatureComponent },
+  {
+    path: 'candidature',
+    component: CandidatureComponent,
+    canActivate: [NoAuthGuard],
+  },
+  {
+    path: 'candidature/submitted',
+    component: SubmittedCandidatureComponent,
+    canActivate: [NoAuthGuard],
+  },
   { path: 'login', component: LogInComponent },
-  { path: 'add-user', component: AddUserComponent },
+  { path: 'add-user', component: AddUserComponent, canActivate: [AuthGuard] },
   {
     path: 'evaluation/:id',
     component: EvaluationComponent,
@@ -23,6 +36,7 @@ const routes: Routes = [
   },
   { path: 'login', component: LogInComponent, canActivate: [NoAuthGuard] },
   { path: 'add-user', component: AddUserComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: 'candidature' },
 ];
 
 @NgModule({
