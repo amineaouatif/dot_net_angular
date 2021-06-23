@@ -40,7 +40,7 @@ export class CandidatureService {
       `${environment.api}/candidature/update `,
       {
         id: id,
-        note: note.toString,
+        note: note.toString(),
         validated: validation,
       }
     );
