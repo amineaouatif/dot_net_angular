@@ -137,7 +137,7 @@
       </div>
     </mat-tab>
 
-    <mat-tab label="Evaluateurs">
+    <mat-tab label="Evaluateurs" *ngIf="userRrole == 'Admin'">
       <div
         class="tab-container-height"
         fxLayout="row"
@@ -203,7 +203,7 @@
         </div>
       </div>
     </mat-tab>
-    <mat-tab label="Ajouter Evaluateur">
+    <mat-tab label="Ajouter Evaluateur" *ngIf="userRrole == 'Admin'">
       <div
         class="tab-container-height"
         fxLayout="row"
