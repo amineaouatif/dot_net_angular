@@ -27,8 +27,10 @@ export class HomeComponent implements OnInit {
     readonly authService: AuthService
   ) {
     this.authService.userRole$.subscribe((role) => {
-      this.userRole = role;
-      this.getData();
+      if (!!role) {
+        this.userRole = role;
+        this.getData();
+      }
     });
   }
 

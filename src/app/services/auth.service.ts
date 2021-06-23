@@ -37,6 +37,7 @@ export class AuthService {
       })
       .pipe(
         map((resp) => {
+          this.authInfo = this.getAuthFromLocalStorage();
           this.isAuthenticated$.next(true);
           console.log(resp.role);
           this.userRole$.next(resp.role);

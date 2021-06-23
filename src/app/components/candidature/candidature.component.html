@@ -14,7 +14,7 @@
     </mat-card>
 
     <mat-vertical-stepper
-      [linear]="true"
+      [linear]="false"
       class="mat-elevation-z2 candidature-vertical-stepper"
       #stepper
     >
@@ -109,7 +109,7 @@
               <mat-select formControlName="typePassage">
                 <mat-option
                   *ngFor="let element of typeAvancement"
-                  [value]="element.value"
+                  [value]="element.name"
                 >
                   {{ element.name }}
                 </mat-option>

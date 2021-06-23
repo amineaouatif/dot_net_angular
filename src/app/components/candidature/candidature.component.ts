@@ -24,13 +24,17 @@ export class CandidatureComponent implements OnInit {
   grades = [{ name: 'A' }, { name: 'B' }, { name: 'C' }, { name: 'D' }];
 
   cadreGrade = [
-    { name: '[PES] Grade A à grade B', value: 'PESAB' },
-    { name: '[PES] Grade B à grade C', value: 'PESBC' },
-    { name: '[PH] Grade A à grade B', value: 'PHAB' },
-    { name: '[PH] Grade B à grade C', value: 'PHBC' },
-    { name: '[PA] Grade A à grade B', value: 'PAAB' },
-    { name: '[PA] Grade B à grade C', value: 'PABC' },
-    { name: '[PA] Grade C à grade D', value: 'PACD' },
+    { name: '[PA] Grade A à grade B' },
+    { name: '[PA] Grade B à grade C' },
+    { name: '[PA] Grade C à grade D' },
+    { name: '[PA] à [PH]' },
+
+    { name: '[PH] Grade A à grade B' },
+    { name: '[PH] Grade B à grade C' },
+    { name: '[PH] à [PES]' },
+
+    { name: '[PES] Grade A à grade B' },
+    { name: '[PES] Grade B à grade C' },
   ];
 
   typeAvancement = [
