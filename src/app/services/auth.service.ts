@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { UserService } from './user.service';
+import { User } from '../dto/user.dto';
 
 interface AuthData {
   username: string;
@@ -16,6 +17,7 @@ interface AuthData {
 })
 export class AuthService {
   isAuthenticated$ = new BehaviorSubject<boolean>(false);
+  userRole$ = new BehaviorSubject<string>('');
   isAuthenticated: boolean;
 
   constructor(private http: HttpClient, private userService: UserService) {
@@ -24,33 +26,42 @@ export class AuthService {
       this.isAuthenticated = val;
     });
   }
-
+  currentUserRole: string;
   login(username: string, password: string) {
     return this.http
-      .post(`${environment.api}/users/authenticate`, {
+      .post<User>(`${environment.api}/users/authenticate`, {
         username,
         password,
       })
       .pipe(
         map((resp) => {
           this.isAuthenticated$.next(true);
-          this.setAuthInLocalStorage(username, password);
+          console.log(resp.role);
+          this.userRole$.next(resp.role);
+          this.setAuthInLocalStorage(username, password, resp.role);
           this.userService.setUserInLocalStorage(resp);
         })
       );
   }
 
-  setAuthInLocalStorage(username: string, password: string): void {
-    localStorage.setItem('auth', JSON.stringify({ username, password }));
+  setAuthInLocalStorage(
+    username: string,
+    password: string,
+    role: string
+  ): void {
+    localStorage.setItem('auth', JSON.stringify({ username, password, role }));
   }
 
   getAuthFromLocalStorage(): AuthData {
     const jsonString = localStorage.getItem('auth');
     if (!!jsonString) {
+      const authInfo = JSON.parse(jsonString);
       this.isAuthenticated$.next(true);
-      return JSON.parse(jsonString);
+      this.userRole$.next(authInfo.role);
+      return authInfo;
     }
     this.isAuthenticated$.next(false);
+    this.userRole$.next('');
     return null;
   }
 
@@ -61,6 +72,7 @@ export class AuthService {
 
   logout() {
     this.isAuthenticated$.next(false);
+    this.userRole$.next('');
     localStorage.setItem('auth', '');
   }
 }

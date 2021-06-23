@@ -6,6 +6,7 @@ import { CandidatureDto } from '../../dto/candidature.dto';
 import { User } from '../../dto/user.dto';
 import { EvaluatorService } from '../../services/evaluator.service';
 import { LoadingService } from '../../services/loading.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -17,13 +18,18 @@ export class HomeComponent implements OnInit {
   untreatedCandidatures: CandidatureDto[] = [];
   treatedCandidatures: CandidatureDto[] = [];
   loading = false;
+  userRrole: string;
 
   constructor(
     readonly homeService: HomeService,
     readonly evaluatorService: EvaluatorService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    readonly authService: AuthService
   ) {
-    this.getData();
+    this.authService.userRole$.subscribe((role) => {
+      this.userRrole = role;
+      this.getData();
+    });
   }
 
   ngOnInit(): void {}
@@ -31,15 +37,15 @@ export class HomeComponent implements OnInit {
   getData() {
     this.loadingService.loading$.next(true);
     this.loading = true;
-    this.homeService
-      .getEvaluators()
-      .subscribe((evals) => {
-        this.evaluateurs = evals;
-        console.log(this.evaluateurs);
-      })
-      .add(() => {
-        this.loadingService.loading$.next(false);
-      });
+    if (this.userRrole == 'Admin')
+      this.homeService
+        .getEvaluators()
+        .subscribe((evals) => {
+          this.evaluateurs = evals;
+        })
+        .add(() => {
+          this.loadingService.loading$.next(false);
+        });
 
     this.homeService
       .getUntreatedCandidatures()
