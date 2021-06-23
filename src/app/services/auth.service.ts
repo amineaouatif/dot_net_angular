@@ -19,12 +19,14 @@ export class AuthService {
   isAuthenticated$ = new BehaviorSubject<boolean>(false);
   userRole$ = new BehaviorSubject<string>('');
   isAuthenticated: boolean;
+  authInfo: any;
 
   constructor(private http: HttpClient, private userService: UserService) {
     this.getAuthFromLocalStorage();
     this.isAuthenticated$.subscribe((val: boolean) => {
       this.isAuthenticated = val;
     });
+    this.authInfo = this.getAuthFromLocalStorage();
   }
   currentUserRole: string;
   login(username: string, password: string) {
@@ -66,8 +68,9 @@ export class AuthService {
   }
 
   getAuthorizationHeader(): string {
-    const authInfo = this.getAuthFromLocalStorage();
-    return authInfo ? btoa(authInfo.username + ':' + authInfo.password) : null;
+    return this.authInfo
+      ? btoa(this.authInfo.username + ':' + this.authInfo.password)
+      : null;
   }
 
   logout() {

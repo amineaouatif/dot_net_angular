@@ -53,7 +53,91 @@
       </div>
     </mat-tab>
 
-    <mat-tab label="Evaluateurs" *ngIf="userRrole == 'Admin'">
+    <mat-tab label="Candidatures Traitées">
+      <div
+        class="tab-container-height"
+        fxLayout="row"
+        fxLayoutAlign="center top"
+        *ngIf="!loading"
+      >
+        <div *ngIf="!!treatedCandidatures?.length" class="table-container">
+          <mat-table [dataSource]="treatedCandidatures" style="cursor: pointer">
+            <ng-container matColumnDef="nom">
+              <mat-header-cell *matHeaderCellDef>Nom</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.candidateLastName }} {{ row.candidateFirstName }}
+                <a
+                  [routerLink]="'/evaluation/' + row.id"
+                  class="mat-row-link"
+                ></a>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="note">
+              <mat-header-cell *matHeaderCellDef>Note</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.note }}
+                <a
+                  [routerLink]="'/evaluation/' + row.id"
+                  class="mat-row-link"
+                ></a>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="dateDeport">
+              <mat-header-cell *matHeaderCellDef>Date de dépôt</mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{ row.createdDate }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="passage">
+              <mat-header-cell *matHeaderCellDef>Passage</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.validated === 1 ? "Refusé" : "Accepeté" }}
+                <a
+                  [routerLink]="'/evaluation/' + row.id"
+                  class="mat-row-link"
+                ></a>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="refrenceToken">
+              <mat-header-cell *matHeaderCellDef>Référence</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.refrenceToken }}
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row
+              *matHeaderRowDef="[
+                'nom',
+                'note',
+                'dateDeport',
+                'refrenceToken',
+                'passage'
+              ]"
+            ></mat-header-row>
+            <mat-row
+              *matRowDef="
+                let row;
+                columns: [
+                  'nom',
+                  'note',
+                  'dateDeport',
+                  'refrenceToken',
+                  'passage'
+                ]
+              "
+            ></mat-row>
+          </mat-table>
+        </div>
+        <div *ngIf="!treatedCandidatures?.length" class="not-found-container">
+          <img class="not-found" src="assets/resume.svg" alt="" />
+          <div class="not-found-text">Il n'y a pas de candidatures.</div>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Evaluateurs" *ngIf="userRole == 'Admin'">
       <div
         class="tab-container-height"
         fxLayout="row"
@@ -119,7 +203,8 @@
         </div>
       </div>
     </mat-tab>
-    <mat-tab label="Ajouter Evaluateur" *ngIf="userRrole == 'Admin'">
+
+    <mat-tab label="Ajouter Evaluateur" *ngIf="userRole == 'Admin'">
       <div
         class="tab-container-height"
         fxLayout="row"

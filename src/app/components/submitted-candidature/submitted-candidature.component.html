@@ -4,7 +4,7 @@
       Dossier : <span class="token-text">{{ token }}</span>
     </h1>
     <div class="evaluation-first-description">
-      <div>Votre dossier n'est pas encore traité</div>
+      <div *ngIf="candidatureDto?.validated === 0">Votre dossier n'est pas encore traité</div>
       <div *ngIf="candidatureDto?.validated !== 0">
         <div>
           Passage :

@@ -19,7 +19,9 @@
   max-width: 1000px;
   margin: 60px auto;
 }
-
+.evaluation-first-description div {
+  margin-top: 15px;
+}
 .evaluation-card {
   padding: 25px;
   margin-top: 40px;
